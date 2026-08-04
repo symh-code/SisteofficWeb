@@ -60,7 +60,7 @@ export default function SobreNosotrosPage() {
             SisteOffic · Barranquilla, Atlántico
           </span>
           <h1 className="mt-4 text-3xl font-light tracking-tight text-white sm:text-5xl">
-            12 años fabricando mobiliario de oficina a la medida en Barranquilla
+            16 años fabricando mobiliario  corporativo a la medida de oficina a la medida en Barranquilla
           </h1>
         </div>
       </section>
@@ -79,10 +79,10 @@ export default function SobreNosotrosPage() {
             </h2>
             <div className="space-y-4 text-xs font-light leading-relaxed text-slate-600">
               <p>
-                Somos una compañía consolidada que abrió sus puertas hace 12 años en el norte de Barranquilla. Nuestro sello nos identifica porque nuestros productos son de alta calidad y además cuentan con garantía.
+                Creemos que una oficina bien diseñada mejora la productividad, el bienestar y la forma en que las personas trabajan. Por eso, desarrollamos soluciones personalizadas que optimizan cada metro cuadrado, adaptándose a las necesidades operativas, estéticas y de crecimiento de cada cliente
               </p>
               <p>
-                En SisteOffic, buscamos que en cada proyecto se obtenga la mayor eficiencia del espacio, aprovechando cada centímetro del área de trabajo. Por esto, nuestros muebles son fabricados a la medida del cliente, brindando así flexibilidad y la oportunidad de crear espacios más productivos en oficinas de Barranquilla y de toda la Costa Caribe colombiana.
+                Nuestro equipo acompaña cada proyecto desde la planificación hasta la instalación, garantizando procesos de fabricación de alta calidad, acabados duraderos y una ejecución cuidadosa en cada detalle.
               </p>
             </div>
           </div>

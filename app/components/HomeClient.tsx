@@ -53,23 +53,29 @@ const fallbackFeaturedProducts = [
   },
 ];
 
-// Hero slider slides (3 slides, 8s each) — estilo Enwork: badge + título grande + subtítulo
+// Hero slider slides (4 slides, 8s each) — usa imágenes locales desde public/slideshero
 const heroSlides = [
   {
-    imagen: "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?q=80&w=2000&auto=format&fit=crop",
-    badge: "Puestos elevables",
+    imagen: "/slideshero/slide1.png",
+    badge: "Recepciones Elegantes",
     titulo: "Espacios abiertos, reinventados",
     subtitulo: "Ajuste inteligente con control sin esfuerzo.",
   },
   {
-    imagen: "https://images.unsplash.com/photo-1519947486511-46149fa0a254?q=80&w=2000&auto=format&fit=crop",
+    imagen: "/slideshero/slide2.png",
     badge: "Sillas ejecutivas",
     titulo: "Comodidad que trabaja para ti",
     subtitulo: "Diseño ergonómico para tu jornada completa.",
   },
   {
-    imagen: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=2000&auto=format&fit=crop",
+    imagen: "/slideshero/slide3.png",
     badge: "Diseño minimalista",
+    titulo: "Transforma tu espacio de trabajo",
+    subtitulo: "Funcionalidad y estilo para cada proyecto.",
+  },
+  {
+    imagen: "/slideshero/slide4.png",
+    badge: "Calidad profesional",
     titulo: "Tu oficina, a tu medida",
     subtitulo: "Mobiliario moderno para equipos que crecen.",
   },
@@ -181,26 +187,6 @@ function ProductCard({ product }: { product: any }) {
           Sale
         </span>
       )}
-
-      {/* Wishlist button */}
-      <button
-        type="button"
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-        }}
-        aria-label="Agregar a favoritos"
-        className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition-colors hover:text-[#7A1E2B]"
-      >
-        <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={1.5}
-            d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 21l-7.682-8.318a4.5 4.5 0 010-6.364z"
-          />
-        </svg>
-      </button>
 
       {/* Image */}
       <div className="aspect-square w-full overflow-hidden">
@@ -399,7 +385,7 @@ function CategoryCard({ category }: { category: any }) {
 // de marca (tono blush derivado de BRAND_COLORS.primarySubtle).
 function SectoresSection() {
   return (
-    <section className="w-full bg-gradient-to-b from-[#F5E6E8] to-[#FAF1EE] px-6 py-20 sm:px-10 lg:px-16">
+    <section className="w-full bg-gradient-to-b from-[#F5E6E8] via-[#F7E3E8] to-[#FFFFFF] px-6 py-20 sm:px-10 lg:px-16">
       <div className="mx-auto max-w-[1440px]">
         <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-[#7A1E2B]">
           Categorías
@@ -532,34 +518,33 @@ export function HomeClient() {
           </h2>
         </div>
 
-        {/* 4 Productos Destacados Estilo Enwork */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* 4 Productos Destacados Estilo Referencia */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {featuredProducts.map((product) => (
             <Link
               key={product.id}
               href={`/productos/${product.id}`}
-              className="group flex flex-col bg-[#f4f2ee] rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg"
+              className="group flex flex-col"
             >
-              <div className="aspect-[4/3] w-full overflow-hidden bg-[#e9e6e1]">
+              <div className="aspect-square w-full overflow-hidden">
                 <img
                   src={product.imagen_url}
                   alt={product.nombre}
-                  className="h-full w-full object-cover p-6 transition-transform duration-500 group-hover:scale-105"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
-              <div className="flex items-center justify-between p-4 bg-[#e6e3de]">
-                <span className="text-sm font-medium text-gray-900">
+              <div className="mt-6 flex items-center justify-between">
+                <span className="text-base font-medium text-gray-900">
                   {product.nombre}
                 </span>
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black/5 text-gray-900 transition-colors group-hover:bg-black/15">
-                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </div>
+                <span className="text-base font-normal text-gray-500">
+                  {formatPrice(product.precio)}
+                </span>
               </div>
             </Link>
           ))}
         </div>
+
       </section>
 
       {/* SECCIÓN DE SECTORES (rediseñada según imagen de referencia) */}
