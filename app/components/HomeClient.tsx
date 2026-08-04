@@ -177,32 +177,27 @@ function ProductCard({ product }: { product: any }) {
     product.precioOriginal && Number(product.precioOriginal) > Number(product.precio);
 
   return (
-    <Link
-      href={`/productos/${product.id}`}
-      className="group relative flex flex-col overflow-hidden rounded-xl bg-[#f2f1ee] transition-shadow duration-300 hover:shadow-md"
-    >
-      {/* SALE badge */}
-      {tieneDescuento && (
-        <span className="absolute left-3 top-3 z-10 rounded bg-red-600 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
-          Sale
-        </span>
-      )}
-
-      {/* Image */}
-      <div className="aspect-square w-full overflow-hidden">
+    <Link href={`/productos/${product.id}`} className="group flex flex-col bg-white">
+      {/* Imagen — ocupa todo el bloque superior, sin relleno ni esquinas redondeadas */}
+      <div className="relative aspect-square w-full overflow-hidden bg-[#ece9e4]">
+        {tieneDescuento && (
+          <span className="absolute left-0 top-0 z-10 bg-[#7A1E2B] px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.18em] text-white">
+            Oferta
+          </span>
+        )}
         {product.imagen_url ? (
           <img
             src={product.imagen_url}
             alt={product.nombre}
-            className="h-full w-full object-contain p-8 transition-transform duration-300 group-hover:scale-105"
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center text-slate-400">
-            <svg className="h-12 w-12 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="flex h-full w-full items-center justify-center text-[#c2bcb0]">
+            <svg className="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={2}
+                strokeWidth={1}
                 d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
               />
             </svg>
@@ -210,16 +205,32 @@ function ProductCard({ product }: { product: any }) {
         )}
       </div>
 
-      {/* Info */}
-      <div className="px-4 pb-4 pt-1">
-        <h3 className="truncate text-sm font-semibold text-[#2c4a70]">{product.nombre}</h3>
-        <div className="mt-1.5 flex items-baseline gap-2">
-          <span className="text-sm font-bold text-slate-900">{formatPrice(product.precio)}</span>
-          {tieneDescuento && (
-            <span className="text-xs text-slate-400 line-through">
-              {formatPrice(product.precioOriginal)}
+      {/* Info — panel gris cortado en diagonal que cubre poco más de la mitad
+          de la tarjeta en reposo, y se expande al hacer hover sobre la card */}
+      <div className="relative overflow-hidden bg-white">
+        <div
+          className="absolute inset-y-0 left-0 w-[58%] bg-[#EAEAE6] transition-[width] duration-500 ease-out group-hover:w-[85%]"
+          style={{ clipPath: "polygon(0 0, 100% 0, calc(100% - 22px) 100%, 0 100%)" }}
+        />
+        <div className="relative z-10 flex flex-col gap-1.5 px-4 py-4">
+          {product.categoria_nombre && (
+            <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-[#9c9990]">
+              {product.categoria_nombre}
             </span>
           )}
+          <h3 className="truncate font-serif text-[16px] leading-snug text-[#1a1a1a] transition-colors group-hover:text-[#7A1E2B]">
+            {product.nombre}
+          </h3>
+          <div className="flex items-baseline gap-2.5">
+            <span className="text-[15px] font-medium text-[#1a1a1a]">
+              {formatPrice(product.precio)}
+            </span>
+            {tieneDescuento && (
+              <span className="text-[13px] text-[#9c9990] line-through">
+                {formatPrice(product.precioOriginal)}
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </Link>
@@ -346,30 +357,31 @@ function CategoryCard({ category }: { category: any }) {
   return (
     <Link
       href={category.href}
-      className="group relative col-span-2 flex min-h-[280px] flex-col justify-end overflow-hidden rounded-xl"
+      className="group relative col-span-2 flex min-h-[280px] flex-col justify-end overflow-hidden"
     >
       {category.imagen ? (
         <img
           src={category.imagen}
           alt={category.nombre}
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
       ) : (
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-100 to-slate-200" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#ece9e4] to-[#d9d3c9]" />
       )}
 
-      {/* Dark gradient overlay for text legibility */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
+      {/* Overlay tonal en vino oscuro (no negro puro) — liga la imagen a la marca */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#1f0f10]/85 via-[#1f0f10]/15 to-transparent" />
 
-      <div className="relative z-10 p-6">
-        <p className="text-xs font-medium uppercase tracking-[0.2em] text-white/70">
+      <div className="relative z-10 p-7">
+        <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-white/60">
           Sisteoffic
         </p>
-        <h3 className="mt-1 text-2xl font-bold leading-tight text-white sm:text-3xl">
+        <h3 className="mt-2 font-serif text-2xl leading-tight text-white sm:text-[28px]">
           {category.nombre}
         </h3>
-        <span className="mt-4 inline-block rounded-full bg-white px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-900 transition-colors group-hover:bg-slate-100">
+        <span className="mt-5 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.15em] text-white">
           Ver productos
+          <span className="h-px w-6 bg-white transition-all duration-300 group-hover:w-10" />
         </span>
       </div>
     </Link>
@@ -476,10 +488,25 @@ export function HomeClient() {
     return products.filter((product) => product.categoria_nombre === categoryName).slice(0, count);
   };
 
-  const categoryOneProducts = getCategoryProducts(categorias[1].nombre, 6);
-  const categoryTwoProducts = getCategoryProducts(categorias[2].nombre, 2);
+  const withFallback = (arr: any[], count: number) => {
+    if (arr.length >= count) return arr.slice(0, count);
+    const padded = [...arr];
+    while (padded.length < count) padded.push(mockProduct);
+    return padded;
+  };
 
-  const product = products[0] ?? mockProduct;
+  const productosSobreCategoria0 = withFallback(getCategoryProducts(categorias[0].nombre, 2), 2);
+  const productosSobreCategoria1 = withFallback(getCategoryProducts(categorias[1].nombre, 2), 2);
+
+  // Pool de productos "genéricos" para las ProductCard que no pertenecen
+  // a ninguna categoría específica del grid. Si hay datos reales de la API
+  // los usa (evitando repetir siempre el mismo); si no, cicla el fallback.
+  const genericProductPool = products.length > 0 ? products : fallbackFeaturedProducts;
+
+  const getGenericProduct = (index: number) => {
+    if (genericProductPool.length === 0) return mockProduct;
+    return genericProductPool[index % genericProductPool.length];
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -566,32 +593,30 @@ export function HomeClient() {
 
         {/* Grid Layout: Products + Category Cards */}
         <div className="grid grid-cols-2 gap-5 md:grid-cols-4">
-          <ProductCard product={product} />
-          <ProductCard product={product} />
-          <ProductCard product={product} />
-          <ProductCard product={product} />
+          <ProductCard product={getGenericProduct(0)} />
+          <ProductCard product={getGenericProduct(1)} />
+          {/* Estas 2 caen justo encima de CategoryCard[0] */}
+          <ProductCard product={productosSobreCategoria0[0]} />
+          <ProductCard product={productosSobreCategoria0[1]} />
 
-          <ProductCard product={product} />
-          <ProductCard product={product} />
+          <ProductCard product={getGenericProduct(2)} />
+          <ProductCard product={getGenericProduct(3)} />
           <CategoryCard category={categorias[0]} />
 
-          <ProductCard product={product} />
-          <ProductCard product={product} />
-          <ProductCard product={product} />
-          <ProductCard product={product} />
+          {/* Estas 2 caen justo encima de CategoryCard[1] */}
+          <ProductCard product={getGenericProduct(12)} />
+          <ProductCard product={getGenericProduct(13)} />
+          <ProductCard product={getGenericProduct(4)} />
+          <ProductCard product={getGenericProduct(5)} />
 
           <CategoryCard category={categorias[1]} />
-          <ProductCard product={product} />
-          <ProductCard product={product} />
+          <ProductCard product={getGenericProduct(6)} />
+          <ProductCard product={getGenericProduct(7)} />
 
-          <ProductCard product={product} />
-          <ProductCard product={product} />
-          <ProductCard product={product} />
-          <ProductCard product={product} />
-
-          <ProductCard product={product} />
-          <ProductCard product={product} />
-          <CategoryCard category={categorias[2]} />
+          <ProductCard product={getGenericProduct(8)} />
+          <ProductCard product={getGenericProduct(9)} />
+          <ProductCard product={getGenericProduct(10)} />
+          <ProductCard product={getGenericProduct(11)} />
         </div>
       </section>
     </div>
