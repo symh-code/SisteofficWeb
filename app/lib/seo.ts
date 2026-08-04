@@ -8,7 +8,7 @@ import type { Metadata } from "next";
  * a partir de este único valor.
  */
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://www.sisteoffic.com";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://sisteoffic.com";
 
 export const SITE_NAME = "SisteOffic";
 
