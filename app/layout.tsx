@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "./components/Navbar";
-import { Footer } from "./components/Footer";
+import { NavbarSwitch } from "./components/NavbarSwitch";
+import { FooterSwitch } from "./components/FooterSwitch";
 import WhatsAppButton from "./components/WhatsAppButton";
 import { CartProvider } from "./components/CartProvider";
 import { TabTitleSwitcher } from "./components/TabTitleSwitcher";
@@ -31,6 +31,7 @@ export const metadata: Metadata = {
   },
   description: DEFAULT_DESCRIPTION,
   alternates: { canonical: absoluteUrl("/") },
+  icons: { icon: "/favicon.ico" },
   openGraph: {
     title: `${DEFAULT_TITLE} | ${SITE_NAME}`,
     description: DEFAULT_DESCRIPTION,
@@ -133,10 +134,10 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col bg-slate-50 text-slate-900">
         <CartProvider>
           <TabTitleSwitcher />
-          <Navbar />
+          <NavbarSwitch />
           <div className="flex-1">{children}</div>
           <WhatsAppButton />
-          <Footer />
+          <FooterSwitch />
         </CartProvider>
       </body>
     </html>

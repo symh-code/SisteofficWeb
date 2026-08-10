@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 
 const PHONE_NUMBER = "573003591054";
 const DEFAULT_MESSAGE =
@@ -8,16 +9,28 @@ const DEFAULT_MESSAGE =
 
 const SCROLL_THRESHOLD = 150; // px que hay que bajar para que aparezca el botón
 
-// Color "rojo" de marca usado en el resto del sitio
+// Color "rojo" de marca usado en el resto del sitio (footer por defecto)
 const FOOTER_ACCENT_COLOR = "#7A1E2B";
 
+// Color chocolate oscuro usado solo en la ruta /camodstudio
+const CAMODSTUDIO_FOOTER_ACCENT_COLOR = "#3C2414";
+
 export default function WhatsAppButton() {
+  const pathname = usePathname();
+  const isCamodStudio = pathname?.startsWith("/camodstudio");
+
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState(DEFAULT_MESSAGE);
   const [visible, setVisible] = useState(false);
   const [overFooter, setOverFooter] = useState(false);
   const popupRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+
+  // Color de acento a usar cuando el footer está visible,
+  // según la ruta actual
+  const footerAccentColor = isCamodStudio
+    ? CAMODSTUDIO_FOOTER_ACCENT_COLOR
+    : FOOTER_ACCENT_COLOR;
 
   // Muestra el botón flotante solo después de scrollear
   useEffect(() => {
@@ -30,7 +43,7 @@ export default function WhatsAppButton() {
   }, []);
 
   // Detecta cuando el footer entra en el viewport para cambiar el color
-  // del botón de blanco/negro a blanco/rojo
+  // del botón de blanco/negro a blanco/rojo (o blanco/chocolate en /camodstudio)
   useEffect(() => {
     const footer = document.querySelector("footer");
     if (!footer) return;
@@ -168,20 +181,20 @@ export default function WhatsAppButton() {
         </div>
       )}
 
-      {/* ====== BOTÓN FLOTANTE — BLANCO/NEGRO, BLANCO/ROJO cerca del footer ====== */}
+      {/* ====== BOTÓN FLOTANTE — BLANCO/NEGRO, BLANCO/ACENTO cerca del footer ====== */}
       <button
         ref={buttonRef}
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? "Cerrar chat de WhatsApp" : "Abrir chat de WhatsApp"}
         style={{
-          color: overFooter ? FOOTER_ACCENT_COLOR : undefined,
+          color: overFooter ? footerAccentColor : undefined,
           boxShadow: overFooter
-            ? `0 0 0 1px ${FOOTER_ACCENT_COLOR}33`
+            ? `0 0 0 1px ${footerAccentColor}33`
             : undefined,
         }}
         className={`flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-xl ring-1 transition-all duration-300 hover:scale-105 active:scale-95 ${
-          overFooter ? "ring-transparent text-[#7A1E2B]" : "text-neutral-900 ring-black/5"
+          overFooter ? "ring-transparent" : "text-neutral-900 ring-black/5"
         }`}
       >
         {open ? (
@@ -191,9 +204,8 @@ export default function WhatsAppButton() {
         ) : (
           <svg
             viewBox="0 0 32 32"
-            className={`h-8 w-8 pointer-events-none transition-colors duration-300 ${
-              overFooter ? "fill-[#7A1E2B]" : "fill-neutral-900"
-            }`}
+            className="h-8 w-8 pointer-events-none transition-colors duration-300"
+            style={{ fill: overFooter ? footerAccentColor : "#171717" }}
             aria-hidden="true"
           >
             <path d="M27.2 4.8A15.87 15.87 0 0 0 16.04 0C7.22 0 .04 7.18.04 16c0 2.82.74 5.58 2.14 8.01L0 32l8.19-2.15c2.34 1.28 4.98 1.95 7.66 1.95h.01c8.82 0 16-7.18 16-16 0-4.27-1.66-8.29-4.66-11.3Zm-11.15 24.6h-.01a13.28 13.28 0 0 1-6.77-1.85l-.49-.29-5.02 1.32 1.34-4.9-.32-.5A13.28 13.28 0 0 1 2.75 16C2.75 8.66 8.7 2.72 16.05 2.72A13.24 13.24 0 0 1 29.28 16c0 7.34-5.95 13.4-13.23 13.4Zm7.26-9.97c-.4-.2-2.35-1.16-2.71-1.29-.36-.13-.63-.2-.9.2-.26.4-1.03 1.29-1.26 1.55-.23.27-.46.3-.86.1-.4-.2-1.68-.62-3.19-1.97-1.18-1.05-1.98-2.35-2.21-2.75-.23-.4-.02-.61.17-.81.18-.18.4-.46.6-.7.2-.23.26-.4.4-.66.13-.27.06-.5-.03-.7-.1-.2-.9-2.16-1.23-2.96-.32-.77-.65-.67-.9-.68-.23-.01-.5-.01-.76-.01-.27 0-.7.1-1.06.5-.36.4-1.4 1.36-1.4 3.32s1.43 3.86 1.63 4.13c.2.27 2.8 4.28 6.79 6 .95.41 1.69.66 2.27.84.95.3 1.82.26 2.51.16.77-.11 2.35-.96 2.68-1.89.33-.93.33-1.72.23-1.89-.1-.16-.36-.26-.76-.46Z"/>

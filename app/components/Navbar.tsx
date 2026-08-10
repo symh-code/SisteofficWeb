@@ -4,11 +4,11 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
-import { Search, ShoppingCart, Menu, X, ArrowRight, Package } from "lucide-react";
+import { Search, ShoppingCart, Menu, X, ArrowRight, Package, ChevronDown } from "lucide-react";
 import { useCart } from "./CartProvider";
 
 /* ─── Navegación ─── */
-const navLinks: {
+const mobiliarioCategorias: {
   label: string;
   href?: string;
   categoria?: string;
@@ -24,9 +24,31 @@ const navLinks: {
   { label: "Accesorios", categoria: "Accesorios" },
 ];
 
-/** Los 3 únicos enlaces del panel del menú (estilo Enwork) */
+/** Servicios desplegados en el dropdown de "Servicios" */
+const serviciosItems: { label: string; slug: string }[] = [
+  { label: "Arquitectura", slug: "arquitectura" },
+  { label: "Diseño Interior", slug: "diseno-interior" },
+  { label: "Adecuaciones", slug: "adecuaciones" },
+  { label: "Fabricación de mobiliario", slug: "fabricacion-de-mobiliario" },
+  { label: "Obra civil", slug: "obra-civil" },
+  { label: "Iluminación", slug: "iluminacion" },
+  { label: "Diseño acústico", slug: "diseno-acustico" },
+];
+
+/** Secciones principales del navbar (desktop) */
+const mainNavLinks: { label: string; href: string }[] = [
+  { label: "Espacios", href: "/espacios" },
+  { label: "CAMÖD Studio", href: "/camodstudio" },
+  { label: "Nosotros", href: "/sobre-nosotros" },
+  { label: "Contacto", href: "/contacto" },
+];
+
+/** Los enlaces del panel del menú (estilo Enwork) */
 const menuLinks: { label: string; href: string }[] = [
   { label: "Ve nuestros productos", href: "/buscar" },
+  { label: "Servicios", href: "/servicios" },
+  { label: "Espacios", href: "/espacios" },
+  { label: "CAMÖD Studio", href: "/camodstudio" },
   { label: "Nosotros", href: "/sobre-nosotros" },
   { label: "Contáctanos", href: "/contacto" },
 ];
@@ -112,6 +134,9 @@ export function Navbar() {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+
+  /* Dropdown de "Mobiliario" / "Servicios" al hacer hover */
+  const [hoveredMenu, setHoveredMenu] = useState<"mobiliario" | "servicios" | null>(null);
 
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -261,6 +286,7 @@ export function Navbar() {
   useEffect(() => {
     setMenuOpen(false);
     setSearchOpen(false);
+    setHoveredMenu(null);
   }, [router]);
 
   /* Bloquear scroll cuando algún overlay está abierto */
@@ -294,7 +320,11 @@ export function Navbar() {
             : `relative left-0 right-0 top-0 z-40 bg-white shadow-sm border-b border-gray-100`
         }
       >
-        <div className="mx-auto w-full max-w-[92rem]" ref={menuRef}>
+        <div
+          className="mx-auto w-full max-w-[92rem]"
+          ref={menuRef}
+          onMouseLeave={() => setHoveredMenu(null)}
+        >
           <div
             className={`mx-4 lg:mx-8 transition-all duration-300 ease-out ${
               menuOpen
@@ -302,7 +332,7 @@ export function Navbar() {
                 : "bg-transparent"
             }`}
           >
-            <div className="flex h-20 w-full items-center justify-between px-4 lg:px-8">
+            <div className="relative flex h-20 w-full items-center justify-between px-4 lg:px-8">
               {/* Logo */}
               <Link href="/" className="flex shrink-0 items-center transition-opacity hover:opacity-90">
                 <Image
@@ -315,12 +345,40 @@ export function Navbar() {
                 />
               </Link>
 
-              {/* Categorías (desktop) */}
+              {/* Secciones (desktop) */}
               <nav className="hidden items-center gap-7 lg:flex">
-                {navLinks.map((link) => (
+                <button
+                  type="button"
+                  onMouseEnter={() => !menuOpen && setHoveredMenu("servicios")}
+                  onClick={() => router.push("/servicios")}
+                  className={`group flex cursor-pointer items-center gap-1 text-[13px] font-medium tracking-wide transition ${textColorClass}`}
+                >
+                  Servicios
+                  <ChevronDown
+                    className={`h-3.5 w-3.5 transition-transform duration-300 ease-out ${
+                      hoveredMenu === "servicios" ? "rotate-180" : "group-hover:translate-y-0.5"
+                    }`}
+                  />
+                </button>
+
+                <Link
+                  href="/buscar"
+                  onMouseEnter={() => !menuOpen && setHoveredMenu("mobiliario")}
+                  className={`group flex cursor-pointer items-center gap-1 text-[13px] font-medium tracking-wide transition ${textColorClass}`}
+                >
+                  Mobiliario
+                  <ChevronDown
+                    className={`h-3.5 w-3.5 transition-transform duration-300 ease-out ${
+                      hoveredMenu === "mobiliario" ? "rotate-180" : "group-hover:translate-y-0.5"
+                    }`}
+                  />
+                </Link>
+
+                {mainNavLinks.map((link) => (
                   <Link
                     key={link.label}
-                    href={navHref(link)}
+                    href={link.href}
+                    onMouseEnter={() => setHoveredMenu(null)}
                     className={`text-[13px] font-medium tracking-wide transition ${textColorClass}`}
                   >
                     {link.label}
@@ -354,12 +412,84 @@ export function Navbar() {
                 </Link>
 
                 <button
-                  onClick={() => setMenuOpen(!menuOpen)}
+                  onClick={() => {
+                    setHoveredMenu(null);
+                    setMenuOpen(!menuOpen);
+                  }}
                   className={`rounded-lg p-2 transition ${iconColorClass}`}
                   aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
                 >
                   {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
                 </button>
+              </div>
+
+              {/* ═══ Dropdown de "Mobiliario" / "Servicios" ═══ */}
+              {/* Posicionado relativo a la fila del navbar (h-20), no al header
+                  completo, para que no se descuadre cuando el menú hamburguesa
+                  está abierto y expande la altura del header. El fondo del
+                  despliegue sigue el mismo estado del navbar: transparente
+                  cuando el navbar es transparente, blanco cuando el navbar es
+                  blanco. Se oculta si el menú hamburguesa está abierto para
+                  evitar que ambos paneles se superpongan. */}
+              <div
+                onMouseEnter={() => !menuOpen && hoveredMenu && setHoveredMenu(hoveredMenu)}
+                className={`absolute inset-x-0 top-full z-40 grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  hoveredMenu && !menuOpen ? "grid-rows-[1fr]" : "pointer-events-none grid-rows-[0fr]"
+                }`}
+              >
+                <div
+                  className={`overflow-hidden transition-colors duration-300 ${
+                    activeDark
+                      ? "border-b border-gray-100 bg-white shadow-lg"
+                      : "bg-transparent"
+                  }`}
+                >
+                  <div className="mx-auto max-w-[92rem] px-4 py-6 lg:px-8">
+                    {hoveredMenu === "mobiliario" && (
+                      <div className="flex flex-wrap gap-x-10 gap-y-4">
+                        {mobiliarioCategorias.map((link, index) => (
+                          <Link
+                            key={link.label}
+                            href={navHref(link)}
+                            onClick={() => setHoveredMenu(null)}
+                            style={{ transitionDelay: hoveredMenu ? `${index * 30}ms` : "0ms" }}
+                            className={`text-sm font-medium transition-all duration-300 ease-out ${
+                              hoveredMenu ? "translate-y-0 opacity-100" : "-translate-y-1 opacity-0"
+                            } ${
+                              activeDark
+                                ? "text-gray-700 hover:text-[#7A1E2B]"
+                                : "text-white/85 hover:text-white"
+                            }`}
+                          >
+                            {link.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+
+                    {hoveredMenu === "servicios" && (
+                      <div className="flex flex-wrap gap-x-10 gap-y-4">
+                        {serviciosItems.map((item, index) => (
+                          <Link
+                            key={item.slug}
+                            href={`/servicios#${item.slug}`}
+                            onClick={() => setHoveredMenu(null)}
+                            style={{ transitionDelay: hoveredMenu ? `${index * 30}ms` : "0ms" }}
+                            className={`text-sm font-medium transition-all duration-300 ease-out ${
+                              hoveredMenu ? "translate-y-0 opacity-100" : "-translate-y-1 opacity-0"
+                            } ${
+                              activeDark
+                                ? "text-gray-700 hover:text-[#7A1E2B]"
+                                : "text-white/85 hover:text-white"
+                            }`}
+                          >
+                            {item.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
 

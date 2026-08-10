@@ -34,11 +34,27 @@ const InstagramIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
+const LinkedinIcon = ({ className }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+  >
+    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM7.114 20.452H3.558V9h3.556v11.452z" />
+  </svg>
+);
+
 const navegacion = [
   { label: "Inicio", href: "/" },
-  { label: "Sillas de oficina en Barranquilla", href: "/sillas-de-oficina-en-barranquilla" },
-  { label: "Buscar productos", href: "/buscar" },
-  { label: "Sobre nosotros", href: "/sobre-nosotros" }
+  { label: "Nosotros", href: "/sobre-nosotros" },
+  { label: "Servicios", href: "/servicios" },
+  { label: "Colecciones", href: "/colecciones" },
+  { label: "Productos", href: "/productos" },
+  { label: "CAMÖD Studio", href: "/camodstudio" },
+  { label: "Contacto", href: "/contacto" },
 ];
 
 const contacto = [
@@ -52,68 +68,155 @@ const horario = [
   { dia: "Domingo", hora: "Cerrado" },
 ];
 
-export function Footer() {
+const redesSociales = [
+  {
+    href: "https://www.instagram.com/sisteofficjl/",
+    icon: InstagramIcon,
+    label: "Instagram Sisteoffic",
+    color: "hover:bg-pink-600 hover:text-white",
+  },
+  {
+    href: "https://www.instagram.com/camodstudio/",
+    icon: InstagramIcon,
+    label: "Instagram CAMÖD",
+    color: "hover:bg-pink-600 hover:text-white",
+  },
+  {
+    href: "https://www.linkedin.com/company/sisteoffic/",
+    icon: LinkedinIcon,
+    label: "LinkedIn",
+    color: "hover:bg-sky-700 hover:text-white",
+  },
+  {
+    href: "https://www.facebook.com/sisteofficjlsas",
+    icon: FacebookIcon,
+    label: "Facebook",
+    color: "hover:bg-blue-600 hover:text-white",
+  },
+  {
+    href: "https://provee.com.co/empresas/sisteoffic-jl-sas",
+    icon: Store,
+    label: "Provee",
+    color: "hover:bg-emerald-600 hover:text-white",
+  },
+];
+
+/* ─── Paleta CAMÖD Studio ─── Chocolate #302416 · Carbón #13110D · Marfil #FCF5ED · Camel #C6AB96 */
+const THEMES = {
+  sisteoffic: {
+    footerBg: "bg-[#6B1212]",
+    topBorder: "from-[#8B1A1A] via-[#C0392B] to-[#8B1A1A]",
+    text60: "text-white/60",
+    text50: "text-white/50",
+    text40: "text-white/40",
+    text35: "text-white/35",
+    text30: "text-white/30",
+    text70: "text-white/70",
+    textSolid: "text-white",
+    hoverWhite: "hover:text-white",
+    hoverWhite80: "hover:text-white/80",
+    underline: "bg-white/50",
+    borderAccent: "border-white",
+    iconBorder: "border-white/10",
+    iconBg: "bg-white/5",
+    iconText: "text-white/70",
+    iconGroupHoverBg: "group-hover:bg-white/10",
+    iconGroupHoverText: "group-hover:text-white",
+    divider: "border-white/10",
+    mapBg: "bg-[#5a0f0f]",
+  },
+  camod: {
+    footerBg: "bg-[#302416]",
+    topBorder: "from-[#C6AB96] via-[#8A7A5C] to-[#C6AB96]",
+    text60: "text-[#FCF5ED]/60",
+    text50: "text-[#FCF5ED]/50",
+    text40: "text-[#FCF5ED]/40",
+    text35: "text-[#FCF5ED]/35",
+    text30: "text-[#FCF5ED]/30",
+    text70: "text-[#FCF5ED]/70",
+    textSolid: "text-[#FCF5ED]",
+    hoverWhite: "hover:text-[#FCF5ED]",
+    hoverWhite80: "hover:text-[#FCF5ED]/80",
+    underline: "bg-[#FCF5ED]/50",
+    borderAccent: "border-[#C6AB96]",
+    iconBorder: "border-[#FCF5ED]/10",
+    iconBg: "bg-[#FCF5ED]/5",
+    iconText: "text-[#FCF5ED]/70",
+    iconGroupHoverBg: "group-hover:bg-[#FCF5ED]/10",
+    iconGroupHoverText: "group-hover:text-[#FCF5ED]",
+    divider: "border-[#FCF5ED]/10",
+    mapBg: "bg-[#1F160D]",
+  },
+} as const;
+
+export function Footer({ isCamod = false }: { isCamod?: boolean }) {
+  const t = isCamod ? THEMES.camod : THEMES.sisteoffic;
+
   return (
-    <footer id="site-footer" className="relative bg-[#6B1212] text-white">
+    <footer id="site-footer" className={`relative ${t.footerBg} text-white`}>
       {/* Decorative top border */}
-      <div className="h-1 w-full bg-gradient-to-r from-[#8B1A1A] via-[#C0392B] to-[#8B1A1A]" />
+      <div className={`h-1 w-full bg-gradient-to-r ${t.topBorder}`} />
 
       <div className="mx-auto max-w-7xl px-6 pt-20 pb-10 lg:px-8">
-        {/* ─── Main Grid ─── */}
+        {/* ─── Main Grid (Distribución 3 - 2 - 3 - 4) ─── */}
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
-          
-          {/* ─── Brand Column ─── */}
-          <div className="lg:col-span-4">
-            <Link 
-              href="/" 
-              className="group inline-flex items-center gap-3"
-            >
+
+          {/* 1. Brand Column (span-3) */}
+          <div className="lg:col-span-3 space-y-6">
+            <Link href={isCamod ? "/camodstudio" : "/"} className="group inline-flex items-center gap-3">
               <Image
-                src="/logo_2.svg"
-                alt="SisteOffic"
-                width={160}
-                height={40}
-                className="h-10 w-auto brightness-0 invert transition-transform duration-300 group-hover:scale-105"
+                src={isCamod ? "/camodLogos/logoCamodBlanco.png" : "/logo_2.svg"}
+                alt={isCamod ? "CAMÖD Studio" : "SisteOffic"}
+                width={420}
+                height={120}
+                className={`w-auto transition-transform duration-300 group-hover:scale-105 ${
+                  isCamod ? "h-28" : "h-10 brightness-0 invert"
+                }`}
                 priority
               />
             </Link>
 
-            <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-white/60">
-              Excelencia en arquitectura de espacios de trabajo. Diseñamos y 
-              fabricamos mobiliario premium que transforma la productividad 
-              de tu empresa.
+            <p className={`text-[15px] leading-relaxed ${t.text60}`}>
+              Diseñamos, fabricamos y transformamos espacios de trabajo.
             </p>
 
-            {/* Social Networks */}
-            <div className="mt-8">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/40">
+            <p className={`text-xs font-semibold uppercase tracking-[0.2em] ${t.text40}`}>
+              Arquitectura • Diseño Interior • Mobiliario • Ejecución
+            </p>
+
+            <Link
+              href="/camodstudio"
+              className={`group/camod inline-flex items-center gap-2.5 border-l-2 ${t.borderAccent} py-1 pl-4 text-[13px] font-medium uppercase tracking-[0.2em] ${t.textSolid} transition-colors ${t.hoverWhite80}`}
+            >
+              Conoce CAMÖD Studio
+              <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/camod:translate-x-0.5 group-hover/camod:-translate-y-0.5" />
+            </Link>
+
+            <div>
+              <p className={`mb-4 text-xs font-semibold uppercase tracking-[0.2em] ${t.text40}`}>
                 Síguenos
               </p>
-              <div className="flex items-center gap-3">
-                {[
-                  { href: "https://www.facebook.com/sisteofficjlsas", icon: FacebookIcon, label: "Facebook", color: "hover:bg-blue-600 hover:text-white" },
-                  { href: "https://www.instagram.com/sisteofficjl/", icon: InstagramIcon, label: "Instagram", color: "hover:bg-pink-600 hover:text-white" },
-                  { href: "https://provee.com.co/empresas/sisteoffic-jl-sas", icon: Store, label: "Provee", color: "hover:bg-emerald-600 hover:text-white" },
-                ].map((social) => (
+              <div className="flex flex-wrap items-center gap-2.5">
+                {redesSociales.map((social) => (
                   <Link
                     key={social.label}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`group flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/70 backdrop-blur-sm transition-all duration-300 ${social.color} hover:shadow-lg hover:shadow-black/20 hover:-translate-y-0.5`}
+                    className={`group flex h-10 w-10 items-center justify-center rounded-xl border ${t.iconBorder} ${t.iconBg} ${t.iconText} backdrop-blur-sm transition-all duration-300 ${social.color} hover:shadow-lg hover:shadow-black/20 hover:-translate-y-0.5`}
                     aria-label={social.label}
                     title={social.label}
                   >
-                    <social.icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+                    <social.icon className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
                   </Link>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* ─── Navigation Column ─── */}
+          {/* 2. Navigation Column (span-2) */}
           <div className="lg:col-span-2">
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-white/40">
+            <h3 className={`text-xs font-bold uppercase tracking-[0.2em] ${t.text40}`}>
               Navegación
             </h3>
             <ul className="mt-6 space-y-3">
@@ -121,98 +224,99 @@ export function Footer() {
                 <li key={item.label}>
                   <Link
                     href={item.href}
-                    className="group inline-flex items-center gap-1.5 text-[15px] text-white/70 transition-all duration-200 hover:text-white"
+                    className={`group inline-flex items-center gap-1.5 text-[14px] ${t.text70} transition-all duration-200 ${t.hoverWhite}`}
                   >
-                    <span className="h-px w-0 bg-white/50 transition-all duration-300 group-hover:w-3" />
+                    <span className={`h-px w-0 ${t.underline} transition-all duration-300 group-hover:w-2`} />
                     {item.label}
-                    <ArrowUpRight className="h-3 w-3 opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* ─── Contact & Hours Column ─── */}
-          <div className="lg:col-span-3">
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-white/40">
-              Contacto
-            </h3>
-            <ul className="mt-6 space-y-4">
-              {contacto.map((item) => (
-                <li key={item.label}>
-                  <a
-                    href={item.href}
-                    className="group flex items-center gap-3 text-[15px] text-white/70 transition-colors hover:text-white"
-                  >
-                    <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-white/50 transition-colors group-hover:bg-white/10 group-hover:text-white">
-                      <item.icon className="h-4 w-4" />
-                    </span>
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          {/* 3. Contact & Hours Column (span-3) */}
+          <div className="lg:col-span-3 space-y-8">
+            <div>
+              <h3 className={`text-xs font-bold uppercase tracking-[0.2em] ${t.text40}`}>
+                Contacto
+              </h3>
+              <ul className="mt-6 space-y-3">
+                {contacto.map((item) => (
+                  <li key={item.label}>
+                    <a
+                      href={item.href}
+                      className={`group flex items-center gap-3 text-[14px] ${t.text70} transition-colors ${t.hoverWhite}`}
+                    >
+                      <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${t.iconBg} ${t.text50} transition-colors ${t.iconGroupHoverBg} ${t.iconGroupHoverText}`}>
+                        <item.icon className="h-3.5 w-3.5" />
+                      </span>
+                      <span className="truncate">{item.label}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-            <h3 className="mt-8 text-xs font-bold uppercase tracking-[0.2em] text-white/40">
-              Horario de atención
-            </h3>
-            <ul className="mt-4 space-y-2.5">
-              {horario.map((h) => (
-                <li key={h.dia} className="flex items-center justify-between text-sm">
-                  <span className="flex items-center gap-2 text-white/50">
-                    <Clock className="h-3.5 w-3.5" />
-                    {h.dia}
-                  </span>
-                  <span className={`font-medium ${h.hora === "Cerrado" ? "text-white/30" : "text-white/70"}`}>
-                    {h.hora}
-                  </span>
-                </li>
-              ))}
-            </ul>
+            <div>
+              <h3 className={`text-xs font-bold uppercase tracking-[0.2em] ${t.text40}`}>
+                Horario de atención
+              </h3>
+              <ul className="mt-4 space-y-2">
+                {horario.map((h) => (
+                  <li key={h.dia} className="flex items-center justify-between gap-4 text-xs">
+                    <span className={`flex items-center gap-1.5 ${t.text50}`}>
+                      <Clock className="h-3 w-3" />
+                      {h.dia}
+                    </span>
+                    <span className={`font-medium ${h.hora === "Cerrado" ? t.text30 : t.text70}`}>
+                      {h.hora}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
-          {/* ─── Location Column ─── */}
-          <div className="lg:col-span-3">
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-white/40">
+          {/* 4. Location Column (span-4) */}
+          <div className="lg:col-span-4">
+            <h3 className={`text-xs font-bold uppercase tracking-[0.2em] ${t.text40}`}>
               Ubicación
             </h3>
-            
+
             <div className="mt-6 flex items-start gap-3">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-white/40" />
-              <address className="not-italic text-[15px] leading-relaxed text-white/60">
+              <MapPin className={`mt-0.5 h-4 w-4 shrink-0 ${t.text40}`} />
+              <address className={`not-italic text-[15px] leading-relaxed ${t.text60}`}>
                 Cl. 85 #81 32 Riomar,<br />
                 Barranquilla, Atlántico<br />
-                <span className="text-white/40">Colombia</span>
+                <span className={t.text40}>Colombia</span>
               </address>
             </div>
 
-            {/* Contenedor relative y group para el mapa y el pin */}
-            <div className="group relative mt-5 overflow-hidden rounded-2xl border border-white/10 bg-[#5a0f0f] shadow-2xl shadow-black/30">
+            {/* Mapa más estrecho (max-w-[280px]) */}
+            <div className={`group relative mt-5 max-w-[280px] overflow-hidden rounded-2xl border ${t.iconBorder} ${t.mapBg} shadow-2xl shadow-black/30`}>
               <iframe
                 title="Ubicación SisteOffic"
                 src="https://www.google.com/maps?q=Cl.+85+%2381+32,+Riomar,+Barranquilla,+Atl%C3%A1ntico&output=embed"
                 width="100%"
-                height="180"
+                height="100"
                 style={{ border: 0, filter: "grayscale(30%) contrast(1.1) brightness(0.9)" }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 className="pointer-events-none transition-all duration-500 group-hover:filter-none"
               />
-              
-              {/* Pin Personalizado sobre el mapa */}
+
               <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-3/4">
                 <Image
-                  src="/gps_logo.png" 
+                  src="/gps_logo.png"
                   alt="Pin SisteOffic"
-                  width={48} 
-                  height={48}
+                  width={28}
+                  height={28}
                   className="drop-shadow-xl"
                 />
               </div>
 
-              {/* Capa invisible para enlazar hacia Google Maps */}
-              <a 
+              <a
                 href="https://www.google.com/maps/dir/?api=1&destination=Cl.+85+%2381+32,+Riomar,+Barranquilla,+Atl%C3%A1ntico"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -225,25 +329,27 @@ export function Footer() {
               href="https://www.google.com/maps/dir/?api=1&destination=Cl.+85+%2381+32,+Riomar,+Barranquilla,+Atl%C3%A1ntico"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-white/50 transition-colors hover:text-white"
+              className={`mt-4 inline-flex items-center gap-2 text-sm font-medium ${t.text50} transition-colors ${t.hoverWhite}`}
             >
               Cómo llegar
               <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
           </div>
+
         </div>
 
         {/* ─── Divider ─── */}
-        <div className="mt-16 border-t border-white/10" />
+        <div className={`mt-16 border-t ${t.divider}`} />
 
         {/* ─── Bottom Bar ─── */}
         <div className="mt-8 flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <p className="text-xs text-white/35">
+          <p className={`text-xs ${t.text35}`}>
             &copy; {new Date().getFullYear()} SisteOffic. Todos los derechos reservados.
           </p>
-          
-          <div className="flex items-center gap-6 text-xs text-white/35">
-          </div>
+
+          <p className={`font-serif text-xs italic ${t.text40}`}>
+            "Diseñamos el lugar donde las ideas, las personas y las empresas crecen."
+          </p>
         </div>
       </div>
     </footer>

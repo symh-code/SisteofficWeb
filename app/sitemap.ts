@@ -18,6 +18,9 @@ const STATIC_ROUTES: { path: string; changeFrequency: MetadataRoute.Sitemap[numb
   { path: "/buscar", changeFrequency: "daily", priority: 0.6 },
   { path: "/sobre-nosotros", changeFrequency: "monthly", priority: 0.5 },
   { path: "/contacto", changeFrequency: "monthly", priority: 0.6 },
+  { path: "/servicios", changeFrequency: "monthly", priority: 0.6 },
+  { path: "/espacios", changeFrequency: "monthly", priority: 0.5 },
+  { path: "/camodstudio", changeFrequency: "monthly", priority: 0.5 },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
