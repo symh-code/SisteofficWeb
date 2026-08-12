@@ -6,6 +6,10 @@ import { Lightbox, type LightboxItem } from "./Lightbox";
 type GaleriaItem = LightboxItem;
 
 const PROYECTOS: GaleriaItem[] = [
+  { src: "/espacios/nuevos/proyecto-11.png", label: "Oficina ejecutiva" },
+  { src: "/espacios/nuevos/proyecto-12.png", label: "Escritorio en L" },
+  { src: "/espacios/nuevos/proyecto-13.png", label: "Estaciones de trabajo" },
+  { src: "/espacios/nuevos/proyecto-14.png", label: "Estaciones de trabajo" },
   { src: "/espacios/ENTRADA.jfif", label: "Recepción" },
   { src: "/espacios/CUBICULO.jfif", label: "Cubículo" },
   { src: "/espacios/CAFETERIA.jfif", label: "Cafetería" },
@@ -15,7 +19,6 @@ const PROYECTOS: GaleriaItem[] = [
   { src: "/espacios/03.jfif", label: "Proyecto ejecutado" },
   { src: "/espacios/04.jfif", label: "Proyecto ejecutado" },
   { src: "/espacios/05.jfif", label: "Proyecto ejecutado" },
-  { src: "/espacios/06.jfif", label: "Proyecto ejecutado" },
   { src: "/espacios/07.jfif", label: "Proyecto ejecutado" },
 ];
 
@@ -33,7 +36,8 @@ const RENDERS: GaleriaItem[] = [
   { src: "/espacios/v1.jpg", label: "Visualización" },
   { src: "/espacios/visual.jpg", label: "Visualización" },
   { src: "/espacios/visual3.jpg", label: "Visualización" },
-  { src: "/espacios/visual4.jpg", label: "Visualización" },
+  { src: "/espacios/nuevos/render-15.png", label: "Vista isométrica" },
+  { src: "/espacios/nuevos/render-16.png", label: "Planta 3D" },
 ];
 
 function GaleriaGrid({

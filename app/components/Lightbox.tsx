@@ -62,7 +62,7 @@ export function Lightbox({
         </button>
       </div>
 
-      <div className="relative flex flex-1 items-center justify-center px-4 pb-6 sm:px-16">
+      <div className="relative flex min-h-0 flex-1 items-center justify-center overflow-hidden px-4 pb-6 sm:px-16">
         <button
           type="button"
           aria-label="Imagen anterior"
@@ -79,7 +79,7 @@ export function Lightbox({
           src={item.src}
           alt={item.label}
           onClick={(e) => e.stopPropagation()}
-          className="max-h-full max-w-full object-contain"
+          className="block h-auto max-h-[calc(100dvh-10rem)] w-auto max-w-[calc(100vw-2rem)] object-contain sm:max-w-[calc(100vw-10rem)]"
         />
 
         <button

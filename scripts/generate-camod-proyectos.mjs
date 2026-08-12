@@ -11,6 +11,17 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
 const IMAGE_EXTENSIONS = new Set([".png", ".jpg", ".jpeg", ".webp", ".jfif"]);
+const EXCLUDED_PROJECTS = new Set(["PROYECTO G.P"]);
+const COVER_OVERRIDES = {
+  "proyecto-comercial": "02.jpeg",
+  "proyecto-comercial-cronicas": "04.png",
+  "proyecto-h-s": "09.png",
+  "proyecto-o-p": "03.jpeg",
+  "proyecto-y-y": "WhatsApp Image 2026-08-04 at 11.20.46 PM (1).jpeg",
+  "proyecto-hostal": "WhatsApp Image 2026-08-04 at 11.16.35 PM.jpeg",
+  "proyecto-j-l": "WhatsApp Image 2026-08-04 at 9.52.40 PM (1).jpeg",
+  "proyecto-e-n": "WhatsApp Image 2026-08-04 at 11.15.14 PM (2).jpeg",
+};
 
 function slugify(input) {
   return input
@@ -39,23 +50,28 @@ function getCamodProyectos() {
 
   const carpetas = fs
     .readdirSync(dir, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
+    .filter((entry) => entry.isDirectory() && !EXCLUDED_PROJECTS.has(entry.name))
     .map((entry) => entry.name)
     .sort(naturalSort);
 
   return carpetas
     .map((carpeta) => {
       const carpetaPath = path.join(dir, carpeta);
+      const slug = slugify(carpeta);
       const imagenes = fs
         .readdirSync(carpetaPath)
         .filter(isImageFile)
         .sort(naturalSort)
         .map((file) => toPublicPath("camodProyectos", carpeta, file));
+      const coverFile = COVER_OVERRIDES[slug];
+      const cover = coverFile
+        ? toPublicPath("camodProyectos", carpeta, coverFile)
+        : imagenes[0] ?? null;
 
       return {
-        slug: slugify(carpeta),
+        slug,
         nombre: carpeta,
-        cover: imagenes[0] ?? null,
+        cover,
         imagenes,
       };
     })

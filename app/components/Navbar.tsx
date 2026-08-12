@@ -6,23 +6,15 @@ import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { Search, ShoppingCart, Menu, X, ArrowRight, Package, ChevronDown } from "lucide-react";
 import { useCart } from "./CartProvider";
+import { MOBILIARIO_CATEGORIAS, mobiliarioHref } from "../data/mobiliarioCategorias";
 
 /* ─── Navegación ─── */
-const mobiliarioCategorias: {
-  label: string;
-  href?: string;
-  categoria?: string;
-}[] = [
-  { label: "Puestos", categoria: "Puestos y estaciones de trabajo" },
-  { label: "Mesas de juntas", categoria: "Mesas de juntas" },
-  { label: "Sillas", href: "/sillas-de-oficina-en-barranquilla" },
-  { label: "Educación", categoria: "Educación" },
-  { label: "Almacenamiento", categoria: "Almacenamiento" },
-  { label: "Complementario", categoria: "Mobiliario complementario" },
-  { label: "Divisiones", categoria: "Divisiones modulares" },
-  { label: "Especiales", categoria: "Muebles especiales" },
-  { label: "Accesorios", categoria: "Accesorios" },
-];
+const mobiliarioConSubcategorias = MOBILIARIO_CATEGORIAS.filter(
+  (categoria) => categoria.subcategorias,
+);
+const mobiliarioSinSubcategorias = MOBILIARIO_CATEGORIAS.filter(
+  (categoria) => !categoria.subcategorias,
+);
 
 /** Servicios desplegados en el dropdown de "Servicios" */
 const serviciosItems: { label: string; slug: string }[] = [
@@ -30,14 +22,13 @@ const serviciosItems: { label: string; slug: string }[] = [
   { label: "Diseño Interior", slug: "diseno-interior" },
   { label: "Adecuaciones", slug: "adecuaciones" },
   { label: "Fabricación de mobiliario", slug: "fabricacion-de-mobiliario" },
-  { label: "Obra civil", slug: "obra-civil" },
-  { label: "Iluminación", slug: "iluminacion" },
-  { label: "Diseño acústico", slug: "diseno-acustico" },
+  { label: "Proyectos llave en mano", slug: "proyectos-llave-en-mano" },
+  { label: "CAMÖD Studio", slug: "camod-studio" },
 ];
 
 /** Secciones principales del navbar (desktop) */
 const mainNavLinks: { label: string; href: string }[] = [
-  { label: "Espacios", href: "/espacios" },
+  { label: "Galería", href: "/espacios" },
   { label: "CAMÖD Studio", href: "/camodstudio" },
   { label: "Nosotros", href: "/sobre-nosotros" },
   { label: "Contacto", href: "/contacto" },
@@ -47,7 +38,7 @@ const mainNavLinks: { label: string; href: string }[] = [
 const menuLinks: { label: string; href: string }[] = [
   { label: "Ve nuestros productos", href: "/buscar" },
   { label: "Servicios", href: "/servicios" },
-  { label: "Espacios", href: "/espacios" },
+  { label: "Galería", href: "/espacios" },
   { label: "CAMÖD Studio", href: "/camodstudio" },
   { label: "Nosotros", href: "/sobre-nosotros" },
   { label: "Contáctanos", href: "/contacto" },
@@ -70,8 +61,8 @@ const menuFeatureTiles: {
     grande: true,
   },
   {
-    nombre: "Puestos y estaciones de trabajo",
-    categoria: "Puestos y estaciones de trabajo",
+    nombre: "Puesto de trabajo",
+    categoria: "Puesto de trabajo",
     imagen:
       "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800&auto=format&fit=crop",
   },
@@ -82,12 +73,6 @@ const menuFeatureTiles: {
       "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&auto=format&fit=crop",
   },
 ];
-
-function navHref(link: { href?: string; categoria?: string }): string {
-  if (link.href) return link.href;
-  if (link.categoria) return `/buscar?categoria=${encodeURIComponent(link.categoria)}`;
-  return "/buscar";
-}
 
 /* ─── Tipos ─── */
 type ApiProduct = {
@@ -304,7 +289,8 @@ export function Navbar() {
   }, [searchOpen]);
 
   // Clases condicionales de color de texto e iconos basados en si es el Home scrolleado/menú abierto o páginas internas
-  const activeDark = !isHome || isScrolled || menuOpen;
+  const dropdownOpen = hoveredMenu !== null && !menuOpen;
+  const activeDark = !isHome || isScrolled || menuOpen || dropdownOpen;
   const textColorClass = activeDark ? "text-gray-900 hover:text-black" : "text-white/80 hover:text-white";
   const iconColorClass = activeDark ? "text-gray-700 hover:bg-gray-100 hover:text-black" : "text-white/70 hover:bg-white/5 hover:text-white";
 
@@ -316,7 +302,13 @@ export function Navbar() {
           isHome
             ? `fixed left-0 right-0 top-0 z-40 transition-all duration-300 ${
                 isVisible ? "translate-y-0" : "-translate-y-full"
-              } ${isScrolled && !menuOpen ? "bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100" : "bg-transparent"}`
+              } ${
+                dropdownOpen
+                  ? "border-b border-[#DDD7CF] bg-[#F3F1EC]/95 shadow-lg backdrop-blur-xl"
+                  : isScrolled && !menuOpen
+                    ? "border-b border-gray-100 bg-white/90 shadow-sm backdrop-blur-md"
+                    : "bg-transparent"
+              }`
             : `relative left-0 right-0 top-0 z-40 bg-white shadow-sm border-b border-gray-100`
         }
       >
@@ -336,11 +328,11 @@ export function Navbar() {
               {/* Logo */}
               <Link href="/" className="flex shrink-0 items-center transition-opacity hover:opacity-90">
                 <Image
-                  src="/logo_blanco.svg"
+                  src="/sisteoffic-logo.png"
                   alt="SisteOffic"
                   width={160}
                   height={40}
-                  className={`h-6 w-auto sm:h-7 transition-all ${activeDark && (!isHome || (isScrolled && !menuOpen)) ? "brightness-0" : ""}`}
+                  className="h-8 w-auto object-contain sm:h-9 lg:h-10"
                   priority
                 />
               </Link>
@@ -350,8 +342,9 @@ export function Navbar() {
                 <button
                   type="button"
                   onMouseEnter={() => !menuOpen && setHoveredMenu("servicios")}
+                  onFocus={() => !menuOpen && setHoveredMenu("servicios")}
                   onClick={() => router.push("/servicios")}
-                  className={`group flex cursor-pointer items-center gap-1 text-[13px] font-medium tracking-wide transition ${textColorClass}`}
+                  className={`group flex cursor-pointer items-center gap-1 text-[15px] font-normal tracking-wide transition ${textColorClass}`}
                 >
                   Servicios
                   <ChevronDown
@@ -364,7 +357,8 @@ export function Navbar() {
                 <Link
                   href="/buscar"
                   onMouseEnter={() => !menuOpen && setHoveredMenu("mobiliario")}
-                  className={`group flex cursor-pointer items-center gap-1 text-[13px] font-medium tracking-wide transition ${textColorClass}`}
+                  onFocus={() => !menuOpen && setHoveredMenu("mobiliario")}
+                  className={`group flex cursor-pointer items-center gap-1 text-[15px] font-normal tracking-wide transition ${textColorClass}`}
                 >
                   Mobiliario
                   <ChevronDown
@@ -379,7 +373,7 @@ export function Navbar() {
                     key={link.label}
                     href={link.href}
                     onMouseEnter={() => setHoveredMenu(null)}
-                    className={`text-[13px] font-medium tracking-wide transition ${textColorClass}`}
+                    className={`text-[15px] font-normal tracking-wide transition ${textColorClass}`}
                   >
                     {link.label}
                   </Link>
@@ -416,7 +410,7 @@ export function Navbar() {
                     setHoveredMenu(null);
                     setMenuOpen(!menuOpen);
                   }}
-                  className={`rounded-lg p-2 transition ${iconColorClass}`}
+                  className={`rounded-lg p-2 transition lg:hidden ${iconColorClass}`}
                   aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
                 >
                   {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -439,36 +433,81 @@ export function Navbar() {
               >
                 <div
                   className={`overflow-hidden transition-colors duration-300 ${
-                    activeDark
-                      ? "border-b border-gray-100 bg-white shadow-lg"
+                    dropdownOpen
+                      ? "border-b border-[#DDD7CF] bg-[#F3F1EC]/95 shadow-lg backdrop-blur-xl"
+                      : activeDark
+                        ? "border-b border-gray-100 bg-white shadow-lg"
                       : "bg-transparent"
                   }`}
                 >
                   <div className="mx-auto max-w-[92rem] px-4 py-6 lg:px-8">
                     {hoveredMenu === "mobiliario" && (
-                      <div className="flex flex-wrap gap-x-10 gap-y-4">
-                        {mobiliarioCategorias.map((link, index) => (
-                          <Link
-                            key={link.label}
-                            href={navHref(link)}
-                            onClick={() => setHoveredMenu(null)}
+                      <div className="grid grid-cols-2 gap-x-10 gap-y-10 md:grid-cols-3 lg:grid-cols-5">
+                        {mobiliarioConSubcategorias.map((categoria, index) => (
+                          <div
+                            key={categoria.slug}
                             style={{ transitionDelay: hoveredMenu ? `${index * 30}ms` : "0ms" }}
-                            className={`text-sm font-medium transition-all duration-300 ease-out ${
+                            className={`border-l pl-5 transition-all duration-300 ease-out ${
                               hoveredMenu ? "translate-y-0 opacity-100" : "-translate-y-1 opacity-0"
-                            } ${
-                              activeDark
-                                ? "text-gray-700 hover:text-[#7A1E2B]"
-                                : "text-white/85 hover:text-white"
-                            }`}
+                            } ${activeDark ? "border-[#7A1E2B]/20" : "border-white/25"}`}
                           >
-                            {link.label}
-                          </Link>
+                            <Link
+                              href={mobiliarioHref(categoria.slug)}
+                              onClick={() => setHoveredMenu(null)}
+                              className={`font-serif text-lg leading-tight transition-colors ${
+                                activeDark
+                                  ? "text-[#241C18] hover:text-[#7A1E2B]"
+                                  : "text-white hover:text-white/75"
+                              }`}
+                            >
+                              {categoria.nombre}
+                            </Link>
+
+                            <div className="mt-4 flex flex-col gap-2.5">
+                              {categoria.subcategorias?.map((subcategoria) => (
+                                <Link
+                                  key={subcategoria.slug}
+                                  href={mobiliarioHref(subcategoria.slug)}
+                                  onClick={() => setHoveredMenu(null)}
+                                  className={`text-[13px] leading-snug transition-colors ${
+                                    activeDark
+                                      ? "text-gray-500 hover:text-[#7A1E2B]"
+                                      : "text-white/65 hover:text-white"
+                                  }`}
+                                >
+                                  {subcategoria.nombre}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
                         ))}
+
+                        <div
+                          style={{ transitionDelay: hoveredMenu ? "120ms" : "0ms" }}
+                          className={`flex flex-col gap-3 border-l pl-5 transition-all duration-300 ease-out ${
+                            hoveredMenu ? "translate-y-0 opacity-100" : "-translate-y-1 opacity-0"
+                          } ${activeDark ? "border-[#7A1E2B]/20" : "border-white/25"}`}
+                        >
+                          {mobiliarioSinSubcategorias.map((categoria) => (
+                            <Link
+                              key={categoria.slug}
+                              href={mobiliarioHref(categoria.slug)}
+                              onClick={() => setHoveredMenu(null)}
+                              className={`font-serif text-[15px] leading-tight transition-colors ${
+                                activeDark
+                                  ? "text-[#241C18] hover:text-[#7A1E2B]"
+                                  : "text-white hover:text-white/75"
+                              }`}
+                            >
+                              {categoria.nombre}
+                            </Link>
+                          ))}
+                        </div>
                       </div>
                     )}
 
                     {hoveredMenu === "servicios" && (
-                      <div className="flex flex-wrap gap-x-10 gap-y-4">
+                      <div className="flex flex-wrap justify-center gap-x-10 gap-y-4">
                         {serviciosItems.map((item, index) => (
                           <Link
                             key={item.slug}

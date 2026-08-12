@@ -63,10 +63,16 @@ export default function ContactPage() {
 
                 <div>
                   <span className="block font-medium uppercase tracking-[0.2em] text-[#7A1E2B] mb-1">
-                    Teléfono
+                    Teléfono / WhatsApp
                   </span>
                   <p className="text-slate-600 font-light">
-                    <a href={`tel:${BUSINESS.telephone.replace(/\s/g, "")}`}>{BUSINESS.telephone}</a>
+                    <a
+                      href="https://wa.me/573003591054"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {BUSINESS.telephone}
+                    </a>
                   </p>
                 </div>
               </div>

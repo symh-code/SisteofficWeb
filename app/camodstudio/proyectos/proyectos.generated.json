@@ -61,7 +61,7 @@
   {
     "slug": "proyecto-comercial",
     "nombre": "PROYECTO COMERCIAL",
-    "cover": "/camodProyectos/PROYECTO%20COMERCIAL/01.jpeg",
+    "cover": "/camodProyectos/PROYECTO%20COMERCIAL/02.jpeg",
     "imagenes": [
       "/camodProyectos/PROYECTO%20COMERCIAL/01.jpeg",
       "/camodProyectos/PROYECTO%20COMERCIAL/02.jpeg"
@@ -70,7 +70,7 @@
   {
     "slug": "proyecto-comercial-cronicas",
     "nombre": "PROYECTO COMERCIAL CRONICAS",
-    "cover": "/camodProyectos/PROYECTO%20COMERCIAL%20CRONICAS/01.png",
+    "cover": "/camodProyectos/PROYECTO%20COMERCIAL%20CRONICAS/04.png",
     "imagenes": [
       "/camodProyectos/PROYECTO%20COMERCIAL%20CRONICAS/01.png",
       "/camodProyectos/PROYECTO%20COMERCIAL%20CRONICAS/02.png",
@@ -106,9 +106,19 @@
     ]
   },
   {
+    "slug": "proyecto-dolphin-rose",
+    "nombre": "PROYECTO DOLPHIN ROSE",
+    "cover": "/camodProyectos/PROYECTO%20DOLPHIN%20ROSE/01.png",
+    "imagenes": [
+      "/camodProyectos/PROYECTO%20DOLPHIN%20ROSE/01.png",
+      "/camodProyectos/PROYECTO%20DOLPHIN%20ROSE/02.png",
+      "/camodProyectos/PROYECTO%20DOLPHIN%20ROSE/03.png"
+    ]
+  },
+  {
     "slug": "proyecto-e-n",
     "nombre": "PROYECTO E.N",
-    "cover": "/camodProyectos/PROYECTO%20E.N/WhatsApp%20Image%202026-08-04%20at%2011.15.14%20PM%20(1).jpeg",
+    "cover": "/camodProyectos/PROYECTO%20E.N/WhatsApp%20Image%202026-08-04%20at%2011.15.14%20PM%20(2).jpeg",
     "imagenes": [
       "/camodProyectos/PROYECTO%20E.N/WhatsApp%20Image%202026-08-04%20at%2011.15.14%20PM%20(1).jpeg",
       "/camodProyectos/PROYECTO%20E.N/WhatsApp%20Image%202026-08-04%20at%2011.15.14%20PM%20(2).jpeg",
@@ -120,20 +130,36 @@
     ]
   },
   {
-    "slug": "proyecto-g-p",
-    "nombre": "PROYECTO G.P",
-    "cover": "/camodProyectos/PROYECTO%20G.P/WhatsApp%20Image%202026-08-04%20at%209.47.14%20PM%20(1).jpeg",
+    "slug": "proyecto-h-s",
+    "nombre": "PROYECTO H.S",
+    "cover": "/camodProyectos/PROYECTO%20H.S/09.png",
     "imagenes": [
-      "/camodProyectos/PROYECTO%20G.P/WhatsApp%20Image%202026-08-04%20at%209.47.14%20PM%20(1).jpeg",
-      "/camodProyectos/PROYECTO%20G.P/WhatsApp%20Image%202026-08-04%20at%209.47.14%20PM%20(2).jpeg",
-      "/camodProyectos/PROYECTO%20G.P/WhatsApp%20Image%202026-08-04%20at%209.47.14%20PM%20(3).jpeg",
-      "/camodProyectos/PROYECTO%20G.P/WhatsApp%20Image%202026-08-04%20at%209.47.14%20PM.jpeg"
+      "/camodProyectos/PROYECTO%20H.S/01.png",
+      "/camodProyectos/PROYECTO%20H.S/02.png",
+      "/camodProyectos/PROYECTO%20H.S/03.png",
+      "/camodProyectos/PROYECTO%20H.S/04.png",
+      "/camodProyectos/PROYECTO%20H.S/05.png",
+      "/camodProyectos/PROYECTO%20H.S/06.png",
+      "/camodProyectos/PROYECTO%20H.S/07.png",
+      "/camodProyectos/PROYECTO%20H.S/08.png",
+      "/camodProyectos/PROYECTO%20H.S/09.png",
+      "/camodProyectos/PROYECTO%20H.S/10.png",
+      "/camodProyectos/PROYECTO%20H.S/11.png",
+      "/camodProyectos/PROYECTO%20H.S/WhatsApp%20Image%202026-08-04%20at%209.57.11%20PM%20(1).jpeg",
+      "/camodProyectos/PROYECTO%20H.S/WhatsApp%20Image%202026-08-04%20at%209.57.11%20PM%20(2).jpeg",
+      "/camodProyectos/PROYECTO%20H.S/WhatsApp%20Image%202026-08-04%20at%209.57.11%20PM.jpeg",
+      "/camodProyectos/PROYECTO%20H.S/WhatsApp%20Image%202026-08-04%20at%209.57.12%20PM.jpeg",
+      "/camodProyectos/PROYECTO%20H.S/WhatsApp%20Image%202026-08-04%20at%209.57.13%20PM%20(1).jpeg",
+      "/camodProyectos/PROYECTO%20H.S/WhatsApp%20Image%202026-08-04%20at%209.57.13%20PM%20(2).jpeg",
+      "/camodProyectos/PROYECTO%20H.S/WhatsApp%20Image%202026-08-04%20at%209.57.13%20PM%20(3).jpeg",
+      "/camodProyectos/PROYECTO%20H.S/WhatsApp%20Image%202026-08-04%20at%209.57.13%20PM%20(4).jpeg",
+      "/camodProyectos/PROYECTO%20H.S/WhatsApp%20Image%202026-08-04%20at%209.57.13%20PM.jpeg"
     ]
   },
   {
     "slug": "proyecto-hostal",
     "nombre": "PROYECTO HOSTAL",
-    "cover": "/camodProyectos/PROYECTO%20HOSTAL/WhatsApp%20Image%202026-08-04%20at%2011.16.35%20PM%20(1).jpeg",
+    "cover": "/camodProyectos/PROYECTO%20HOSTAL/WhatsApp%20Image%202026-08-04%20at%2011.16.35%20PM.jpeg",
     "imagenes": [
       "/camodProyectos/PROYECTO%20HOSTAL/WhatsApp%20Image%202026-08-04%20at%2011.16.35%20PM%20(1).jpeg",
       "/camodProyectos/PROYECTO%20HOSTAL/WhatsApp%20Image%202026-08-04%20at%2011.16.35%20PM%20(2).jpeg",
@@ -154,7 +180,7 @@
   {
     "slug": "proyecto-j-l",
     "nombre": "PROYECTO J.L",
-    "cover": "/camodProyectos/PROYECTO%20J.L/WhatsApp%20Image%202026-08-04%20at%209.52.39%20PM.jpeg",
+    "cover": "/camodProyectos/PROYECTO%20J.L/WhatsApp%20Image%202026-08-04%20at%209.52.40%20PM%20(1).jpeg",
     "imagenes": [
       "/camodProyectos/PROYECTO%20J.L/WhatsApp%20Image%202026-08-04%20at%209.52.39%20PM.jpeg",
       "/camodProyectos/PROYECTO%20J.L/WhatsApp%20Image%202026-08-04%20at%209.52.40%20PM%20(1).jpeg",
@@ -174,9 +200,20 @@
     ]
   },
   {
+    "slug": "proyecto-o-p",
+    "nombre": "PROYECTO O.P",
+    "cover": "/camodProyectos/PROYECTO%20O.P/03.jpeg",
+    "imagenes": [
+      "/camodProyectos/PROYECTO%20O.P/01.jpeg",
+      "/camodProyectos/PROYECTO%20O.P/02.jpeg",
+      "/camodProyectos/PROYECTO%20O.P/03.jpeg",
+      "/camodProyectos/PROYECTO%20O.P/04.jpeg"
+    ]
+  },
+  {
     "slug": "proyecto-y-y",
     "nombre": "PROYECTO Y.Y",
-    "cover": "/camodProyectos/PROYECTO%20Y.Y/WhatsApp%20Image%202026-08-04%20at%2011.19.23%20PM.jpeg",
+    "cover": "/camodProyectos/PROYECTO%20Y.Y/WhatsApp%20Image%202026-08-04%20at%2011.20.46%20PM%20(1).jpeg",
     "imagenes": [
       "/camodProyectos/PROYECTO%20Y.Y/WhatsApp%20Image%202026-08-04%20at%2011.19.23%20PM.jpeg",
       "/camodProyectos/PROYECTO%20Y.Y/WhatsApp%20Image%202026-08-04%20at%2011.19.24%20PM%20(1).jpeg",

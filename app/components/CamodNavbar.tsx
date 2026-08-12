@@ -11,12 +11,11 @@ import { Menu, X, ArrowRight, ArrowLeft } from "lucide-react";
 
 const camodLinks: { label: string; href: string }[] = [
   { label: "Quiénes somos", href: "/camodstudio#quienes-somos" },
-  { label: "Arquitectura Interior", href: "/camodstudio#arquitectura-interior" },
-  { label: "Diseño Corporativo", href: "/camodstudio#diseno-corporativo" },
   { label: "Nuestro proceso", href: "/camodstudio#proceso" },
   { label: "Moodboards", href: "/camodstudio#moodboards" },
   { label: "Renders", href: "/camodstudio#renders" },
   { label: "Proyectos", href: "/camodstudio#proyectos" },
+  { label: "Colección CAMÖD", href: "/camodstudio#productos" },
 ];
 
 export function CamodNavbar() {

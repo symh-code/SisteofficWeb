@@ -23,8 +23,8 @@ export function CamodHero() {
       className="relative flex h-[92vh] min-h-[680px] w-full items-end overflow-hidden sm:min-h-[760px]"
     >
       <img
-        src="/slideshero/slide1.png"
-        alt="Recepción corporativa diseñada por CAMÖD Studio"
+        src="/camodstudio/hero-le-ciel-bleu.png"
+        alt="Proyecto de interiorismo Le Ciel Bleu diseñado por CAMÖD Studio"
         className="animate-kenburns absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-[#13110D]/95 via-[#13110D]/45 to-[#13110D]/10" />

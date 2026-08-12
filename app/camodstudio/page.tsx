@@ -100,13 +100,15 @@ const moodboardImages = [
 ];
 
 const renderImages = [
-  "/renders/01.png",
-  "/renders/02.jpg",
-  "/renders/03.jfif",
-  "/renders/04.jfif",
-  "/renders/05.jfif",
-  "/renders/06.jfif",
-  "/renders/07.png",
+  "/camodstudio/renders/render-01.jpeg",
+  "/camodstudio/renders/render-02.jpeg",
+  "/camodstudio/renders/render-03.png",
+  "/camodstudio/renders/render-04.jpeg",
+  "/camodstudio/renders/render-05.png",
+  "/camodstudio/renders/render-06.png",
+  "/camodstudio/renders/render-07.jpeg",
+  "/camodstudio/renders/render-08.jpeg",
+  "/camodstudio/renders/render-09.jpeg",
 ];
 
 const WHATSAPP_HREF =
@@ -127,14 +129,14 @@ export default async function CamodStudioPage() {
           {/* Imagen — a sangre completa, ocupa toda la mitad izquierda de la sección */}
           <div className="relative min-h-[420px] lg:min-h-[720px]">
             <Image
-              src="/slideshero/slide2.png"
-              alt="Sala de juntas diseñada por CAMÖD Studio"
+              src="/camodstudio/quienes-somos-cafeteria.jpeg"
+              alt="Cafetería diseñada por CAMÖD Studio"
               fill
               className="object-cover"
             />
             {/* Cédula de crédito, estilo ficha de producto */}
             <div className="absolute bottom-0 left-0 flex items-center gap-3 bg-[#FAF6EE] px-5 py-3">
-              <span className="font-serif text-sm italic text-[#302416]">Sala de reuniones</span>
+              <span className="font-serif text-sm italic text-[#302416]">Espacio comercial</span>
               <span className="h-3 w-px bg-[#302416]/25" />
               <span className="text-[10px] uppercase tracking-[0.2em] text-[#302416]/60">
                 CAMÖD Studio
@@ -368,12 +370,14 @@ export default async function CamodStudioPage() {
             la primera conversación hasta la entrega final del proyecto.
           </p>
           <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link
-              href="/contacto"
+            <a
+              href={WHATSAPP_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-[#302416]/20 px-8 py-3.5 text-sm font-medium text-[#302416] transition hover:border-[#302416] hover:bg-[#302416]/5"
             >
-              Escríbenos por el formulario
-            </Link>
+              Escríbenos a WhatsApp
+            </a>
           </div>
         </div>
       </section>

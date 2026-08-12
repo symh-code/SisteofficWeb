@@ -1,6 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Store, MapPin, Phone, Mail, Clock, ArrowUpRight } from "lucide-react";
+import { Store, MapPin, Mail, Clock, ArrowUpRight } from "lucide-react";
+
+const WhatsAppIcon = ({ className }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    aria-hidden="true"
+  >
+    <path d="M12.04 2a9.84 9.84 0 0 0-8.46 14.86L2 22l5.28-1.54A9.95 9.95 0 1 0 12.04 2Zm0 17.9a8.03 8.03 0 0 1-4.1-1.12l-.3-.18-3.13.92.93-3.05-.2-.31A7.92 7.92 0 0 1 4 11.9a8.04 8.04 0 1 1 8.04 8Zm4.42-6.03c-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.37-1.94-1.19a7.3 7.3 0 0 1-1.34-1.67c-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.47-.39-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.1 3.62.57.25 1.02.39 1.37.5.58.18 1.1.16 1.51.1.46-.07 1.43-.59 1.63-1.15.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z" />
+  </svg>
+);
 
 const FacebookIcon = ({ className }: { className?: string }) => (
   <svg
@@ -58,27 +70,21 @@ const navegacion = [
 ];
 
 const contacto = [
-  { icon: Phone, label: "+57 300 359 1054", href: "tel:+573003591054" },
+  { icon: WhatsAppIcon, label: "+57 300 359 1054", href: "https://wa.me/573003591054" },
   { icon: Mail, label: "comercial.sisteofficjl@gmail.com", href: "mailto:comercial.sisteofficjl@gmail.com" },
 ];
 
 const horario = [
-  { dia: "Lun - Vie", hora: "8:00 a.m. - 6:00 p.m." },
-  { dia: "Sábado", hora: "9:00 a.m. - 2:00 p.m." },
+  { dia: "Lun - Vie", hora: "8:30 a.m. - 5:45 p.m." },
+  { dia: "Sábado", hora: "8:30 a.m. - 1:30 p.m." },
   { dia: "Domingo", hora: "Cerrado" },
 ];
 
-const redesSociales = [
+const redesSisteoffic = [
   {
     href: "https://www.instagram.com/sisteofficjl/",
     icon: InstagramIcon,
     label: "Instagram Sisteoffic",
-    color: "hover:bg-pink-600 hover:text-white",
-  },
-  {
-    href: "https://www.instagram.com/camodstudio/",
-    icon: InstagramIcon,
-    label: "Instagram CAMÖD",
     color: "hover:bg-pink-600 hover:text-white",
   },
   {
@@ -101,11 +107,20 @@ const redesSociales = [
   },
 ];
 
+const redesCamod = [
+  {
+    href: "https://www.instagram.com/camod.diseno?igsh=c2xzNGJ0eGZqeDhw",
+    icon: InstagramIcon,
+    label: "Instagram CAMÖD",
+    color: "hover:bg-[#8A6A52] hover:text-white",
+  },
+];
+
 /* ─── Paleta CAMÖD Studio ─── Chocolate #302416 · Carbón #13110D · Marfil #FCF5ED · Camel #C6AB96 */
 const THEMES = {
   sisteoffic: {
-    footerBg: "bg-[#6B1212]",
-    topBorder: "from-[#8B1A1A] via-[#C0392B] to-[#8B1A1A]",
+    footerBg: "bg-[#24211F]",
+    topBorder: "from-[#24211F] via-[#7A1E2B] to-[#24211F]",
     text60: "text-white/60",
     text50: "text-white/50",
     text40: "text-white/40",
@@ -123,7 +138,7 @@ const THEMES = {
     iconGroupHoverBg: "group-hover:bg-white/10",
     iconGroupHoverText: "group-hover:text-white",
     divider: "border-white/10",
-    mapBg: "bg-[#5a0f0f]",
+    mapBg: "bg-[#1B1917]",
   },
   camod: {
     footerBg: "bg-[#302416]",
@@ -154,6 +169,19 @@ export function Footer({ isCamod = false }: { isCamod?: boolean }) {
 
   return (
     <footer id="site-footer" className={`relative ${t.footerBg} text-white`}>
+      {!isCamod && (
+        <svg className="absolute h-0 w-0" aria-hidden="true">
+          <filter id="sisteoffic-dark-logo" colorInterpolationFilters="sRGB">
+            <feComponentTransfer>
+              <feFuncR type="table" tableValues="1 1" />
+              <feFuncG type="table" tableValues="1 0" />
+              <feFuncB type="table" tableValues="1 0" />
+              <feFuncA type="identity" />
+            </feComponentTransfer>
+          </filter>
+        </svg>
+      )}
+
       {/* Decorative top border */}
       <div className={`h-1 w-full bg-gradient-to-r ${t.topBorder}`} />
 
@@ -163,15 +191,19 @@ export function Footer({ isCamod = false }: { isCamod?: boolean }) {
 
           {/* 1. Brand Column (span-3) */}
           <div className="lg:col-span-3 space-y-6">
-            <Link href={isCamod ? "/camodstudio" : "/"} className="group inline-flex items-center gap-3">
+            <Link
+              href={isCamod ? "/camodstudio" : "/"}
+              className="group inline-flex items-center gap-3"
+            >
               <Image
-                src={isCamod ? "/camodLogos/logoCamodBlanco.png" : "/logo_2.svg"}
+                src={isCamod ? "/camodLogos/logoCamodBlanco.png" : "/sisteoffic-logo.png"}
                 alt={isCamod ? "CAMÖD Studio" : "SisteOffic"}
                 width={420}
                 height={120}
                 className={`w-auto transition-transform duration-300 group-hover:scale-105 ${
-                  isCamod ? "h-28" : "h-10 brightness-0 invert"
+                  isCamod ? "h-28" : "h-10 object-contain"
                 }`}
+                style={isCamod ? undefined : { filter: "url(#sisteoffic-dark-logo)" }}
                 priority
               />
             </Link>
@@ -192,24 +224,47 @@ export function Footer({ isCamod = false }: { isCamod?: boolean }) {
               <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/camod:translate-x-0.5 group-hover/camod:-translate-y-0.5" />
             </Link>
 
-            <div>
-              <p className={`mb-4 text-xs font-semibold uppercase tracking-[0.2em] ${t.text40}`}>
-                Síguenos
-              </p>
-              <div className="flex flex-wrap items-center gap-2.5">
-                {redesSociales.map((social) => (
-                  <Link
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`group flex h-10 w-10 items-center justify-center rounded-xl border ${t.iconBorder} ${t.iconBg} ${t.iconText} backdrop-blur-sm transition-all duration-300 ${social.color} hover:shadow-lg hover:shadow-black/20 hover:-translate-y-0.5`}
-                    aria-label={social.label}
-                    title={social.label}
-                  >
-                    <social.icon className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
-                  </Link>
-                ))}
+            <div className="space-y-5">
+              <div>
+                <p className={`mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] ${t.text40}`}>
+                  Sisteoffic
+                </p>
+                <div className="flex flex-wrap items-center gap-2.5">
+                  {redesSisteoffic.map((social) => (
+                    <Link
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`group flex h-10 w-10 items-center justify-center rounded-xl border ${t.iconBorder} ${t.iconBg} ${t.iconText} backdrop-blur-sm transition-all duration-300 ${social.color} hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20`}
+                      aria-label={social.label}
+                      title={social.label}
+                    >
+                      <social.icon className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <p className={`mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] ${t.text40}`}>
+                  CAMÖD
+                </p>
+                <div className="flex flex-wrap items-center gap-2.5">
+                  {redesCamod.map((social) => (
+                    <Link
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`group flex h-10 w-10 items-center justify-center rounded-xl border ${t.iconBorder} ${t.iconBg} ${t.iconText} backdrop-blur-sm transition-all duration-300 ${social.color} hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20`}
+                      aria-label={social.label}
+                      title={social.label}
+                    >
+                      <social.icon className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -245,6 +300,8 @@ export function Footer({ isCamod = false }: { isCamod?: boolean }) {
                   <li key={item.label}>
                     <a
                       href={item.href}
+                      target={item.href.startsWith("https://wa.me/") ? "_blank" : undefined}
+                      rel={item.href.startsWith("https://wa.me/") ? "noopener noreferrer" : undefined}
                       className={`group flex items-center gap-3 text-[14px] ${t.text70} transition-colors ${t.hoverWhite}`}
                     >
                       <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${t.iconBg} ${t.text50} transition-colors ${t.iconGroupHoverBg} ${t.iconGroupHoverText}`}>
@@ -310,9 +367,9 @@ export function Footer({ isCamod = false }: { isCamod?: boolean }) {
                 <Image
                   src="/gps_logo.png"
                   alt="Pin SisteOffic"
-                  width={28}
-                  height={28}
-                  className="drop-shadow-xl"
+                  width={880}
+                  height={1205}
+                  className="h-auto w-7 drop-shadow-xl"
                 />
               </div>
 

@@ -25,6 +25,10 @@ type ApiProduct = {
   especificaciones: string | null;
   categoria_id?: number | null;
   categoria_nombre?: string | null;
+  categoria_slug?: string | null;
+  categoria_parent_id?: number | null;
+  categoria_padre_nombre?: string | null;
+  categoria_padre_slug?: string | null;
   created_at: string;
   updated_At: string;
 };
@@ -37,6 +41,9 @@ type CatalogProduct = {
   specifications: string;
   categoria: string;
   categoriaId: number | null;
+  categoriaSlug: string | null;
+  categoriaPadre: string | null;
+  categoriaPadreSlug: string | null;
 };
 
 type SortOption = "relevance" | "price-asc" | "price-desc" | "name-asc";
@@ -665,14 +672,28 @@ export function CatalogView({ query }: { query: string }) {
       return;
     }
 
-    const matched = categories.find(
-      (cat) => cat.name.toLowerCase() === categoriaParam.toLowerCase(),
+    const normalizedParam = categoriaParam.toLowerCase();
+    const matchedIds = Array.from(
+      new Set(
+        products
+          .filter((product) =>
+            [
+              product.categoria,
+              product.categoriaSlug,
+              product.categoriaPadre,
+              product.categoriaPadreSlug,
+            ].some((value) => value?.toLowerCase() === normalizedParam),
+          )
+          .map((product) => product.categoriaId)
+          .filter((id): id is number => id != null),
+      ),
     );
-    if (matched) {
-      setSelectedCategories([Number(matched.slug)]);
+
+    if (matchedIds.length > 0) {
+      setSelectedCategories(matchedIds);
       setPage(1);
     }
-  }, [searchParams, categories]);
+  }, [searchParams, products]);
 
   /* Evitar scroll de fondo en drawer móvil */
   useEffect(() => {
@@ -702,6 +723,9 @@ export function CatalogView({ query }: { query: string }) {
           specifications: p.especificaciones ?? "",
           categoria: p.categoria_nombre ?? "Sin categoría",
           categoriaId: p.categoria_id ?? null,
+          categoriaSlug: p.categoria_slug ?? null,
+          categoriaPadre: p.categoria_padre_nombre ?? null,
+          categoriaPadreSlug: p.categoria_padre_slug ?? null,
         }));
 
         setProducts(mapped);

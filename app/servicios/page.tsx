@@ -104,10 +104,7 @@ export default function ServiciosPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/10" />
 
         <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 pb-20 sm:px-10 sm:pb-28 lg:px-16">
-          <span className="inline-flex items-center gap-2.5 border-l-2 border-white bg-white/10 px-4 py-2 text-[11px] font-medium uppercase tracking-[0.25em] text-white backdrop-blur-md">
-            Servicios
-          </span>
-          <h1 className="mt-6 max-w-3xl font-serif text-[32px] leading-[1.15] text-white sm:text-5xl lg:text-6xl">
+          <h1 className="max-w-3xl font-serif text-[32px] leading-[1.15] text-white sm:text-5xl lg:text-6xl">
             Soluciones integrales para espacios de trabajo
           </h1>
           <p className="mt-5 max-w-xl text-base font-light leading-relaxed text-white/85 sm:text-lg">

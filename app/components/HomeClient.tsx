@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { MOBILIARIO_CATEGORIAS, mobiliarioHref } from "../data/mobiliarioCategorias";
 
 // Brand colors
 const BRAND_COLORS = {
@@ -38,8 +39,6 @@ const mockProduct = {
   especificaciones: "Soporte lumbar ajustable, brazo 4D, base de aluminio, cuero sintético premium",
 };
 
-const FEATURED_PRODUCT_IDS = [1, 3, 8, 10];
-
 const fallbackFeaturedProducts = [
   {
     id: 1,
@@ -75,7 +74,7 @@ const fallbackFeaturedProducts = [
 const heroSlides = [
   {
     imagen: "/slideshero/slide1.png",
-    badge: "Arquitectura interior",
+    badge: "Mobiliario corporativo",
     titulo: "Espacios abiertos, reinventados",
     subtitulo: "Ajuste inteligente con control sin esfuerzo.",
   },
@@ -156,7 +155,7 @@ function categoriaHref(nombre: string): string {
 // Categories data
 const CATEGORIA_DATA = [
   {
-    nombre: "Puestos y estaciones de trabajo",
+    nombre: "Puesto de trabajo",
     imagen: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=400&h=400&fit=crop&crop=center",
   },
   {
@@ -168,7 +167,7 @@ const CATEGORIA_DATA = [
     imagen: "https://images.unsplash.com/photo-1519947486511-46149fa0a254?w=400&h=400&fit=crop&crop=center",
   },
   {
-    nombre: "Educación",
+    nombre: "Línea educativa",
     imagen: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=400&fit=crop&crop=center",
   },
   {
@@ -176,15 +175,15 @@ const CATEGORIA_DATA = [
     imagen: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&h=400&fit=crop&crop=center",
   },
   {
-    nombre: "Mobiliario complementario",
+    nombre: "Cabinas Zenbox",
     imagen: "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=400&h=400&fit=crop&crop=center",
   },
   {
-    nombre: "Divisiones modulares",
+    nombre: "Divisiones",
     imagen: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&h=400&fit=crop&crop=center",
   },
   {
-    nombre: "Muebles especiales",
+    nombre: "Mobiliario especial",
     imagen: "https://images.unsplash.com/photo-1460317442991-0ec209397118?w=400&h=400&fit=crop&crop=center",
   },
   {
@@ -201,79 +200,28 @@ const categorias = CATEGORIA_DATA.map((cat) => ({
   href: cat.nombre === "Sillas" ? "/sillas-de-oficina-en-barranquilla" : categoriaHref(cat.nombre),
 }));
 
-// Sectores a los que atiende la marca — usado en la nueva sección estilo referencia
-const SECTOR_DATA = [
-  {
-    nombre: "Oficina",
-    imagen: "https://images.unsplash.com/photo-1705909773284-bcbbad9a4023?q=80&w=900&auto=format&fit=crop",
-  },
-  {
-    nombre: "Educación",
-    imagen: "https://images.unsplash.com/photo-1561089489-f13d5e730d72?q=80&w=900&auto=format&fit=crop",
-  },
-  {
-    nombre: "Hospitality",
-    imagen: "https://images.unsplash.com/photo-1646991761123-d83ce47c30c9?q=80&w=900&auto=format&fit=crop",
-  },
-  {
-    nombre: "Sanidad",
-    imagen: "https://images.unsplash.com/photo-1776883700432-1df0abe9fc18?q=80&w=900&auto=format&fit=crop",
-  },
-];
-
-const sectores = SECTOR_DATA.map((sector) => ({
-  ...sector,
-  href: categoriaHref(sector.nombre),
-}));
-
-// Colecciones de mobiliario — cada botón enlaza a la búsqueda filtrada por la
-// categoría equivalente ya existente en CATEGORIA_DATA (cuando aplica); las que
-// no tienen categoría propia buscan directamente por su propio nombre.
-const COLECCIONES_DATA = [
-  { nombre: "Recepciones", categoria: "Recepciones" },
-  { nombre: "Estaciones de trabajo", categoria: "Puestos y estaciones de trabajo" },
-  { nombre: "Sala de juntas", categoria: "Mesas de juntas" },
-  { nombre: "Oficinas ejecutivas", categoria: "Oficinas ejecutivas" },
-  { nombre: "Espacios colaborativos", categoria: "Espacios colaborativos" },
-  { nombre: "Archivo y almacenamiento", categoria: "Almacenamiento" },
-  { nombre: "Divisiones y cabinas", categoria: "Divisiones modulares" },
-  { nombre: "Mobiliario especial", categoria: "Muebles especiales" },
-];
-
-const colecciones = COLECCIONES_DATA.map((col) => ({
-  nombre: col.nombre,
-  href: categoriaHref(col.categoria),
-}));
-
-// Format price helper
-function formatPrice(price: number | string | null): string {
-  const numeric = typeof price === "number" ? price : Number.parseFloat(String(price ?? "0"));
-  if (!Number.isFinite(numeric)) return "Precio no disponible";
-  return new Intl.NumberFormat("es-CO", {
-    style: "currency",
-    currency: "COP",
-    maximumFractionDigits: 0,
-  }).format(numeric);
-}
+const CATEGORY_DEMO_IMAGES: Record<string, string> = {
+  "puesto-de-trabajo": "/entrefoto-inicio.png",
+  mesas: "/espacios/CAFETERIA.jfif",
+  sillas: "/categorias/sillas.png",
+  almacenamiento: "/categorias/almacenamiento.png",
+  "linea-educativa": "/categorias/linea-educativa.png",
+  "cabinas-zenbox": "/categorias/cabinas-zenbox.png",
+  divisiones: "/espacios/visual3.jpg",
+  counter: "/espacios/ENTRADA.jfif",
+  "mobiliario-especial": "/espacios/render4.png",
+  accesorios: "/categorias/accesorios.png",
+};
 
 function ProductCard({ product }: { product: any }) {
-  const tieneDescuento =
-    product.precioOriginal && Number(product.precioOriginal) > Number(product.precio);
-
   return (
-    <Link href={`/productos/${product.id}`} className="group flex flex-col bg-white">
-      {/* Imagen — ocupa todo el bloque superior, sin relleno ni esquinas redondeadas */}
-      <div className="relative aspect-square w-full overflow-hidden bg-[#ece9e4]">
-        {tieneDescuento && (
-          <span className="absolute left-0 top-0 z-10 bg-[#7A1E2B] px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.18em] text-white">
-            Oferta
-          </span>
-        )}
+    <Link href={`/productos/${product.id}`} className="group flex min-w-0 flex-col bg-transparent">
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-white">
         {product.imagen_url ? (
           <img
             src={product.imagen_url}
             alt={product.nombre}
-            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+            className="h-full w-full scale-[1.08] object-contain p-2 transition-transform duration-700 ease-out group-hover:scale-[1.14] sm:p-3"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center text-[#c2bcb0]">
@@ -289,40 +237,28 @@ function ProductCard({ product }: { product: any }) {
         )}
       </div>
 
-      {/* Info — panel gris cortado en diagonal que cubre poco más de la mitad
-          de la tarjeta en reposo, y se expande al hacer hover sobre la card */}
-      <div className="relative overflow-hidden bg-white">
+      <div className="relative overflow-hidden bg-transparent">
         <div
           className="absolute inset-y-0 left-0 w-[58%] bg-[#EAEAE6] transition-[width] duration-500 ease-out group-hover:w-[85%]"
           style={{ clipPath: "polygon(0 0, 100% 0, calc(100% - 22px) 100%, 0 100%)" }}
         />
         <div className="relative z-10 flex flex-col gap-1.5 px-4 py-4">
-          {product.categoria_nombre && (
-            <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-[#9c9990]">
-              {product.categoria_nombre}
-            </span>
-          )}
-          <h3 className="truncate font-serif text-[16px] leading-snug text-[#1a1a1a] transition-colors group-hover:text-[#7A1E2B]">
+          <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-[#9c9990]">
+            SISTEOFFIC
+          </span>
+          <h3 className="truncate text-[16px] font-medium leading-snug text-[#1a1a1a] transition-colors group-hover:text-[#7A1E2B]">
             {product.nombre}
           </h3>
-          <div className="flex items-baseline gap-2.5">
-            {tieneDescuento && (
-              <span className="text-[13px] text-[#9c9990] line-through">
-                {formatPrice(product.precioOriginal)}
-              </span>
-            )}
-          </div>
         </div>
       </div>
     </Link>
   );
 }
 
-// Tarjeta de producto CAMÖD — misma línea visual que ProductCard, sin precio
-// y con la etiqueta de marca fija; enlaza a la sección de productos de CAMÖD Studio.
+// Tarjeta CAMÖD con identidad visual propia y sin precio.
 function CamodProductCard({ product }: { product: { id: number; nombre: string; imagen_url: string } }) {
   return (
-    <Link href="/camodstudio#productos" className="group flex flex-col bg-white">
+    <Link href="/camodstudio#productos" className="group flex flex-col bg-transparent">
       <div className="relative aspect-square w-full overflow-hidden bg-[#13110D]">
         <span className="absolute left-0 top-0 z-10 bg-[#302416] px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.18em] text-[#C6AB96]">
           CAMÖD
@@ -347,7 +283,7 @@ function CamodProductCard({ product }: { product: { id: number; nombre: string; 
         )}
       </div>
 
-      <div className="relative overflow-hidden bg-white">
+      <div className="relative overflow-hidden bg-transparent">
         <div
           className="absolute inset-y-0 left-0 w-[58%] bg-[#EAEAE6] transition-[width] duration-500 ease-out group-hover:w-[85%]"
           style={{ clipPath: "polygon(0 0, 100% 0, calc(100% - 22px) 100%, 0 100%)" }}
@@ -356,7 +292,7 @@ function CamodProductCard({ product }: { product: { id: number; nombre: string; 
           <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-[#9c9990]">
             CAMÖD Studio
           </span>
-          <h3 className="truncate font-serif text-[16px] leading-snug text-[#1a1a1a] transition-colors group-hover:text-[#7A1E2B]">
+          <h3 className="truncate font-serif text-[16px] leading-snug text-[#302416]">
             {product.nombre}
           </h3>
         </div>
@@ -408,6 +344,8 @@ function HeroSlider() {
             src={s.imagen}
             alt={s.titulo}
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out ${
+              index === 3 ? "object-top" : "object-center"
+            } ${
               index === currentSlide ? "opacity-100" : "opacity-0"
             }`}
           />
@@ -419,35 +357,27 @@ function HeroSlider() {
             desde lg se distribuyen en fila con el/los botón(es) a la derecha. */}
         <div className="absolute inset-x-0 bottom-20 sm:bottom-24 px-6 sm:px-10 lg:px-16 z-10">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            {/* Bloque de texto */}
-            <div
-              key={isProjectsSlide ? "proyectos" : "default"}
-              className="ml-0 sm:ml-10 md:ml-24 lg:ml-32 xl:ml-48 transition-opacity duration-500 ease-in-out"
-            >
-              <span className="inline-flex items-center gap-2.5 bg-white/10 backdrop-blur-md border-l-2 border-white px-4 py-2 text-[11px] font-medium uppercase tracking-[0.25em] text-white">
-                {isProjectsSlide ? "Proyectos llave en mano" : slide.badge}
-              </span>
-              <h1 className="mt-4 max-w-[90vw] sm:max-w-xl md:max-w-2xl lg:max-w-3xl font-serif text-[28px] leading-[1.15] text-white xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
-                {isProjectsSlide
-                  ? "Diseñamos, fabricamos e instalamos"
-                  : "Mobiliario de oficina a la medida en Barranquilla"}
-              </h1>
-              <h2 className="mt-3 max-w-[85vw] sm:max-w-lg md:max-w-xl lg:max-w-2xl font-serif text-base leading-tight text-white/90 sm:text-lg md:text-xl">
-                {isProjectsSlide
-                  ? "Un solo equipo para desarrollar todo tu espacio de trabajo."
-                  : "Diseñamos espacios que potencian el bienestar y la productividad"}
-              </h2>
-              {!isProjectsSlide && (
+            {/* El slide 4 ya incorpora el mensaje en la imagen. */}
+            {!isProjectsSlide && (
+              <div className="ml-0 transition-opacity duration-500 ease-in-out sm:ml-10 md:ml-24 lg:ml-32 xl:ml-48">
+                <h1 className="max-w-[90vw] font-serif text-[28px] leading-[1.15] text-white xs:text-3xl sm:max-w-xl sm:text-4xl md:max-w-2xl md:text-5xl lg:max-w-3xl lg:text-6xl">
+                  Mobiliario de oficina a la medida en toda la costa Caribe
+                </h1>
+                <h2 className="mt-3 max-w-[85vw] font-serif text-base leading-tight text-white/90 sm:max-w-lg sm:text-lg md:max-w-xl md:text-xl lg:max-w-2xl">
+                  Diseñamos espacios que potencian el bienestar y la productividad
+                </h2>
                 <p className="mt-3 max-w-[80vw] sm:max-w-sm md:max-w-md text-sm font-light text-white/80 sm:text-base">
                   Desde la idea hasta el último detalle.
                 </p>
-              )}
-            </div>
+              </div>
+            )}
 
-            {/* CTA: Cotizar Proyecto (slides 1-3) / dos botones (slide 4) */}
+            {/* CTA: cotización (slides 1-3) / navegación de proyectos (slide 4) */}
             <div
               key={isProjectsSlide ? "cta-proyectos" : "cta-default"}
-              className="ml-0 sm:ml-10 md:ml-24 lg:ml-0 lg:mr-8 xl:mr-16 flex-shrink-0 flex flex-col sm:flex-row gap-3 transition-opacity duration-500 ease-in-out"
+              className={`ml-0 flex flex-shrink-0 flex-col gap-3 transition-opacity duration-500 ease-in-out sm:ml-10 sm:flex-row md:ml-24 lg:mr-8 ${
+                isProjectsSlide ? "lg:ml-auto" : "lg:ml-0"
+              } xl:mr-16`}
             >
               {isProjectsSlide ? (
                 <>
@@ -485,7 +415,7 @@ function HeroSlider() {
                   href="/contacto"
                   className="group/cta inline-flex items-center justify-center gap-3 whitespace-nowrap bg-[#7A1E2B] px-8 py-4 text-[13px] font-normal uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:bg-[#5c1620] w-full sm:w-auto text-center"
                 >
-                  Cotizar Proyecto
+                  Cotizar mobiliario
                   <svg
                     className="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover/cta:translate-x-1"
                     fill="none"
@@ -610,86 +540,82 @@ function CategoryCard({
   );
 }
 
-// Slider horizontal para explorar el resto de categorías dentro de la sección de sectores
-
-
-// Sección de sectores — estilo referencia: párrafo introductorio grande
-// seguido de una grilla de 4 imágenes con etiqueta simple debajo (sin overlay),
-// y un slider para navegar el resto de categorías. Fondo alineado a la paleta
-// de marca (tono blush derivado de BRAND_COLORS.primarySubtle).
-function SectoresSection() {
-  return (
-    <section className="w-full bg-gradient-to-b from-[#F5E6E8] via-[#F7E3E8] to-[#FFFFFF] px-6 py-20 sm:px-10 lg:px-16">
-      <div className="mx-auto max-w-[1440px]">
-        <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-[#7A1E2B]">
-          Categorías
-        </span>
-        <p className="max-w-3xl text-3xl font-normal leading-[1.35] text-[#3a1219] sm:text-4xl">
-          Explora nuestras categorías de producto para encontrar soluciones pensadas por tipo de espacio y uso.
-        </p>
-
-        <div className="mt-14 grid grid-cols-2 gap-6 lg:grid-cols-4">
-          {categorias.map((cat, idx) => {
-            const isLast = idx === categorias.length - 1;
-            return (
-              <Link
-                key={cat.nombre}
-                href={cat.href}
-                className={`group flex flex-col ${isLast ? "col-span-2 lg:col-span-4 items-center" : ""}`}
-              >
-                <div className="w-full h-48 sm:h-56 lg:h-56 overflow-hidden rounded-xl bg-[#e7d5d8]">
-                  <img
-                    src={cat.imagen}
-                    alt={cat.nombre}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <span className={`mt-4 text-base font-medium text-[#3a1219] ${isLast ? 'text-center' : ''}`}>
-                  {cat.nombre}
-                </span>
-              </Link>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// Sección de colecciones de mobiliario — grilla de botones por categoría,
-// cada uno enlaza a la búsqueda con el filtro correspondiente aplicado.
+// Carrusel horizontal de categorías y subcategorías de mobiliario.
 function ColeccionesSection() {
-  return (
-    <section className="w-full bg-white px-6 py-20 sm:px-10 lg:px-16">
-      <div className="mx-auto max-w-[1440px]">
-        <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-[#7A1E2B]">
-          Colecciones de mobiliario
-        </span>
-        <p className="max-w-3xl text-3xl font-normal leading-[1.35] text-[#3a1219] sm:text-4xl">
-          Diseñamos y fabricamos soluciones para cada espacio de trabajo.
-        </p>
+  const carouselRef = useRef<HTMLDivElement | null>(null);
 
-        <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {colecciones.map((coleccion) => (
-            <Link
-              key={coleccion.nombre}
-              href={coleccion.href}
-              className="group flex items-center justify-between border border-[#e5dfd8] px-6 py-5 text-left transition-colors duration-300 hover:border-[#7A1E2B] hover:bg-[#F5E6E8]"
+  const moveCarousel = (direction: -1 | 1) => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+    carousel.scrollBy({
+      left: direction * Math.min(carousel.clientWidth * 0.82, 560),
+      behavior: "smooth",
+    });
+  };
+
+  return (
+    <section className="w-full overflow-hidden bg-white px-6 py-20 sm:px-10 lg:px-16">
+      <div className="mx-auto max-w-[1440px]">
+        <div className="flex items-end justify-between gap-8">
+          <div>
+            <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-[#7A1E2B]">
+              Colecciones de mobiliario
+            </span>
+            <p className="max-w-3xl text-3xl font-normal leading-[1.35] text-[#3a1219] sm:text-4xl">
+              Diseñamos y fabricamos soluciones para cada espacio de trabajo.
+            </p>
+          </div>
+
+          <div className="hidden shrink-0 items-center gap-2 sm:flex">
+            <button
+              type="button"
+              onClick={() => moveCarousel(-1)}
+              aria-label="Ver colecciones anteriores"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-[#D8D1C8] text-[#3A1219] transition hover:border-[#7A1E2B] hover:bg-[#7A1E2B] hover:text-white"
             >
-              <span className="font-serif text-lg leading-tight text-[#1a1a1a] transition-colors group-hover:text-[#7A1E2B]">
-                {coleccion.nombre}
-              </span>
-              <svg
-                className="h-4 w-4 shrink-0 text-[#7A1E2B] transition-transform duration-300 group-hover:translate-x-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.25} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
+              <span aria-hidden="true">←</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => moveCarousel(1)}
+              aria-label="Ver más colecciones"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-[#D8D1C8] text-[#3A1219] transition hover:border-[#7A1E2B] hover:bg-[#7A1E2B] hover:text-white"
+            >
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+
+        <div
+          ref={carouselRef}
+          className="mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {MOBILIARIO_CATEGORIAS.map((categoria) => (
+            <Link
+              key={categoria.slug}
+              href={mobiliarioHref(categoria.slug)}
+              className="group relative aspect-[4/5] min-w-[78%] snap-start overflow-hidden bg-[#EAE6E0] sm:min-w-[300px] lg:min-w-[320px] xl:min-w-[340px]"
+            >
+              <img
+                src={CATEGORY_DEMO_IMAGES[categoria.slug]}
+                alt={categoria.nombre}
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+
+              <div className="absolute inset-x-0 bottom-0 flex h-14 items-stretch bg-[#38322E]/75 backdrop-blur-sm">
+                <span className="flex min-w-0 flex-1 items-center truncate px-4 font-serif text-xl text-white">
+                  {categoria.nombre}
+                </span>
+                <span className="flex w-12 shrink-0 items-center justify-center bg-[#F3F1EC] text-xl text-[#302416] transition-colors group-hover:bg-[#7A1E2B] group-hover:text-white">
+                  →
+                </span>
+              </div>
             </Link>
           ))}
         </div>
+
+        <p className="mt-2 text-xs text-[#8A817A] sm:hidden">Desliza hacia la derecha para ver más</p>
       </div>
     </section>
   );
@@ -721,7 +647,7 @@ function FraseSection() {
   }, []);
 
   return (
-    <section className="relative w-full overflow-hidden bg-gradient-to-br from-[#3a1219] via-[#7A1E2B] to-[#5c1620] px-6 py-28 sm:px-10 sm:py-36 lg:px-16">
+    <section className="relative w-full overflow-hidden bg-gradient-to-br from-[#3a1219] via-[#7A1E2B] to-[#5c1620] px-6 py-10 sm:px-10 sm:py-12 lg:px-16">
       {/* Glow sutil que da profundidad al degradado sin romper el minimalismo */}
       <div className="pointer-events-none absolute -top-1/2 left-1/2 h-[140%] w-[140%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,_rgba(160,40,56,0.35)_0%,_transparent_60%)]" />
 
@@ -736,11 +662,11 @@ function FraseSection() {
             isVisible ? "w-12 delay-300" : "w-0"
           }`}
         />
-        <p className="mt-10 font-serif text-2xl font-light leading-[1.5] tracking-[0.01em] text-white sm:text-3xl lg:text-[2.5rem]">
+        <p className="mt-4 font-serif text-2xl font-light leading-[1.35] tracking-[0.01em] text-white sm:text-3xl lg:text-[2rem]">
           Diseñamos el lugar donde las ideas,<br className="hidden sm:block" /> las personas y las empresas crecen.
         </p>
         <span
-          className={`mt-10 h-px bg-white/40 transition-all duration-1000 ease-out ${
+          className={`mt-4 h-px bg-white/40 transition-all duration-1000 ease-out ${
             isVisible ? "w-12 delay-300" : "w-0"
           }`}
         />
@@ -806,11 +732,6 @@ export function HomeClient() {
     fetchProducts();
   }, []);
 
-  const featuredProducts =
-    products.length > 0
-      ? products.filter((product) => FEATURED_PRODUCT_IDS.includes(Number(product.id)))
-      : fallbackFeaturedProducts;
-
   const getCategoryProducts = (categoryName: string, count: number) => {
     if (products.length === 0) {
       return Array.from({ length: count }, () => mockProduct);
@@ -827,7 +748,6 @@ export function HomeClient() {
   };
 
   const productosSobreCategoria0 = withFallback(getCategoryProducts(categorias[0].nombre, 2), 2);
-  const productosSobreCategoria1 = withFallback(getCategoryProducts(categorias[1].nombre, 2), 2);
 
   // Pool de productos "genéricos" para las ProductCard que no pertenecen
   // a ninguna categoría específica del grid. Si hay datos reales de la API
@@ -849,7 +769,7 @@ export function HomeClient() {
       {/* HERO BANNER */}
       <HeroSlider />
 
-      {/* SECCIÓN SOBRE NOSOTROS + 4 PRODUCTOS DESTACADOS (Estilo Referencia Imagen) */}
+      {/* SECCIÓN SOBRE NOSOTROS */}
       <section className="mx-auto max-w-[1440px] px-6 py-20 sm:px-10 lg:px-16">
         {/* Fila superior: Texto con menos ancho a la izquierda y Botón a la derecha */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
@@ -869,7 +789,7 @@ export function HomeClient() {
           {/* Contenedor de botones (Ocupa las 5 columnas restantes) */}
           <div className="lg:col-span-5 flex flex-col sm:flex-row lg:justify-start gap-4">
             <Link
-              href="/sisteoffic-jl"
+              href="/buscar"
               className="inline-flex items-center justify-center gap-2 rounded-md bg-gray-900 px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-800"
             >
               <span>Conoce Sisteoffic JL</span>
@@ -895,53 +815,16 @@ export function HomeClient() {
           <ProcesoSection />
         </div>
 
-        {/* Título de la sección de productos */}
-        <div className="mt-20 mb-8">
-          <h2 className="font-serif text-2xl sm:text-3xl text-gray-900">
-            Productos Destacados
-          </h2>
-        </div>
-
-        {/* 4 Productos Destacados Estilo Referencia */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {featuredProducts.map((product) => (
-            <Link
-              key={product.id}
-              href={`/productos/${product.id}`}
-              className="group flex flex-col"
-            >
-              <div className="aspect-square w-full overflow-hidden">
-                <img
-                  src={product.imagen_url}
-                  alt={product.nombre}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-              <div className="mt-6 flex items-center justify-between">
-                <span className="text-base font-medium text-gray-900">
-                  {product.nombre}
-                </span>
-                <span className="text-base font-normal text-gray-500">
-                  {formatPrice(product.precio)}
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
-
       </section>
-
-      {/* SECCIÓN DE SECTORES (rediseñada según imagen de referencia) */}
-      <SectoresSection />
-
-      {/* SECCIÓN DE COLECCIONES DE MOBILIARIO */}
-      <ColeccionesSection />
 
       {/* SECCIÓN DE FRASE DE MARCA */}
       <FraseSection />
 
+      {/* SECCIÓN DE COLECCIONES DE MOBILIARIO */}
+      <ColeccionesSection />
+
       {/* PRODUCTS AND CATEGORIES GRID LAYOUT — full width */}
-      <section className="w-full px-6 pb-16 pt-20 lg:px-12">
+      <section className="w-full bg-white px-6 pb-16 pt-20 lg:px-12">
         <div className="mb-8 flex items-center justify-between">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">
            Explora Nuestro Mobiliario
@@ -964,14 +847,19 @@ export function HomeClient() {
 
           <ProductCard product={getGenericProduct(2)} />
           <ProductCard product={getGenericProduct(3)} />
-          <CategoryCard category={categorias[0]} />
+          <CategoryCard category={categorias[0]} imagenOverride="/entrefoto-inicio.png" />
 
           {/* Estas 2 caen justo encima de CategoryCard[1] */}
           <ProductCard product={getGenericProduct(12)} />
           <ProductCard product={getGenericProduct(13)} />
           <ProductCard product={getGenericProduct(4)} />
           <ProductCard product={getGenericProduct(5)} />
+        </div>
+      </section>
 
+      {/* CAMÖD STUDIO */}
+      <section className="w-full border-t border-[#D8D4CC] bg-[#F2F1EF] px-6 py-12 lg:px-12">
+        <div className="grid grid-cols-2 gap-5 md:grid-cols-4">
           <CategoryCard
             category={categorias[1]}
             imagenOverride="/camodCategoria.png"
