@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "generate:camod-proyectos": "node scripts/generate-camod-proyectos.mjs",
-    "build": "pnpm run generate:camod-proyectos && next build",
+    "build:next": "pnpm run generate:camod-proyectos && next build",
+    "build": "node scripts/build.mjs",
     "dev": "pnpm run generate:camod-proyectos && next dev",
     "start": "next start",
     "lint": "eslint",
