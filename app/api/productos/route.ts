@@ -13,11 +13,16 @@ export async function GET() {
           p.precio,
           p.especificaciones,
           p.categoria_id,
-          c.nombre as categoria_nombre,
+          COALESCE(c.nombre_visible, c.nombre) AS categoria_nombre,
+          c.slug AS categoria_slug,
+          c.parent_id AS categoria_parent_id,
+          COALESCE(cp.nombre_visible, cp.nombre) AS categoria_padre_nombre,
+          cp.slug AS categoria_padre_slug,
           p.created_at,
           p.updated_At
         FROM productos p
         LEFT JOIN categorias c ON c.id = p.categoria_id
+        LEFT JOIN categorias cp ON cp.id = c.parent_id
         ORDER BY p.id DESC
       `)
       .all();

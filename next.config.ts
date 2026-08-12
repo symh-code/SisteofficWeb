@@ -1,8 +1,12 @@
 import type { NextConfig } from "next";
 import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 
-// Ensure OpenNext Cloudflare dev helpers are initialized during Next.js config
-initOpenNextCloudflareForDev();
+// Use the persisted local bindings during `next dev`. Production builds still
+// receive their bindings from Cloudflare at runtime.
+initOpenNextCloudflareForDev({
+  remoteBindings: false,
+  persist: true,
+});
 
 const nextConfig: NextConfig = {
   /* config options here */
