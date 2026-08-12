@@ -47,7 +47,17 @@ export async function GET(
       );
     }
 
-    return Response.json(producto);
+    const imagenes = await env.DB
+      .prepare(`
+        SELECT id, imagen_url, angulo, orden
+        FROM producto_imagenes
+        WHERE producto_id = ?
+        ORDER BY orden ASC, id ASC
+      `)
+      .bind(productId)
+      .all();
+
+    return Response.json({ ...producto, imagenes: imagenes.results });
   } catch (error) {
     console.error("Error obteniendo producto:", error);
 

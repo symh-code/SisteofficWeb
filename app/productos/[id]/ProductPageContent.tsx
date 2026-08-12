@@ -21,6 +21,12 @@ type Product = {
   especificaciones: string | null;
   created_at: string;
   updated_At: string;
+  imagenes?: Array<{
+    id: number;
+    imagen_url: string;
+    angulo: string | null;
+    orden: number;
+  }>;
 };
 
 type QuoteFormData = {
@@ -40,9 +46,9 @@ const EMPTY_FORM: QuoteFormData = {
 };
 
 function formatPrice(price: number | string | null) {
-  const value = Number(price ?? 0);
-  if (!Number.isFinite(value)) {
-    return "Precio no disponible";
+  const value = Number(price);
+  if (!Number.isFinite(value) || value <= 0) {
+    return "Precio a cotizar";
   }
   return new Intl.NumberFormat("es-CO", {
     style: "currency",
@@ -187,6 +193,7 @@ export default function ProductPageContent({
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Partial<Record<keyof QuoteFormData, string>>>({});
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(product.imagen_url ?? "");
   const [submittedName, setSubmittedName] = useState("");
 
   useEffect(() => {
@@ -212,6 +219,11 @@ export default function ProductPageContent({
   };
 
   const displayProduct = product || mockProduct;
+  const galleryImages = displayProduct.imagenes?.length
+    ? displayProduct.imagenes
+    : displayProduct.imagen_url
+      ? [{ id: 0, imagen_url: displayProduct.imagen_url, angulo: "frente", orden: 1 }]
+      : [];
 
   // Mock related products if none are provided
   const mockRelated: Product[] = [
@@ -348,7 +360,7 @@ export default function ProductPageContent({
         
         {/* Product Image */}
         <div className="lg:col-span-7 bg-[#FAFAFA] rounded-2xl border border-slate-100 p-12 flex items-center justify-center relative min-h-[480px]">
-          {displayProduct.imagen_url ? (
+          {selectedImage ? (
             <>
               {!imageLoaded && (
                 <div className="absolute inset-0 flex items-center justify-center bg-[#FAFAFA]">
@@ -356,7 +368,7 @@ export default function ProductPageContent({
                 </div>
               )}
               <img
-                src={displayProduct.imagen_url}
+                src={selectedImage}
                 alt={displayProduct.nombre}
                 className={`max-h-[450px] w-full object-contain transition-opacity duration-500 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
                 onLoad={() => setImageLoaded(true)}
@@ -364,6 +376,30 @@ export default function ProductPageContent({
             </>
           ) : (
             <div className="text-slate-400 text-xs uppercase tracking-widest">Sin imagen disponible</div>
+          )}
+          {galleryImages.length > 1 && (
+            <div className="absolute inset-x-6 bottom-6 flex justify-center gap-3">
+              {galleryImages.map((image) => (
+                <button
+                  key={image.id}
+                  type="button"
+                  onClick={() => {
+                    setImageLoaded(false);
+                    setSelectedImage(image.imagen_url);
+                  }}
+                  className={`h-20 w-20 overflow-hidden rounded-lg border bg-white p-1 shadow-sm transition ${
+                    selectedImage === image.imagen_url ? "border-[#7A1E2B]" : "border-slate-200 hover:border-slate-400"
+                  }`}
+                  aria-label={`Ver ${image.angulo ?? "otra vista"} de ${displayProduct.nombre}`}
+                >
+                  <img
+                    src={image.imagen_url}
+                    alt={`${displayProduct.nombre} — ${image.angulo ?? "vista adicional"}`}
+                    className="h-full w-full object-contain"
+                  />
+                </button>
+              ))}
+            </div>
           )}
         </div>
 

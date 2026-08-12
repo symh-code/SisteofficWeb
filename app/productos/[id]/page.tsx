@@ -13,7 +13,7 @@ type ProductPageProps = {
 
 function formatCOP(price: number | string | null): number | null {
   const numeric = typeof price === "number" ? price : Number.parseFloat(String(price ?? ""));
-  return Number.isFinite(numeric) ? numeric : null;
+  return Number.isFinite(numeric) && numeric > 0 ? numeric : null;
 }
 
 function buildDescription(nombre: string, especificaciones: string | null): string {

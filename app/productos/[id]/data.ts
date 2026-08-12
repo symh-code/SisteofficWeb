@@ -11,6 +11,14 @@ export type Product = {
   categoria_nombre?: string | null;
   created_at: string;
   updated_At: string;
+  imagenes?: ProductImage[];
+};
+
+export type ProductImage = {
+  id: number;
+  imagen_url: string;
+  angulo: string | null;
+  orden: number;
 };
 
 /** Memoizado por request: generateMetadata() y la página comparten esta
@@ -41,7 +49,20 @@ export const getProduct = cache(async (productId: number): Promise<Product | nul
     .bind(productId)
     .first<Product>();
 
-  return result ?? null;
+  if (!result) return null;
+
+  const images = await env.DB.prepare(
+    `
+      SELECT id, imagen_url, angulo, orden
+      FROM producto_imagenes
+      WHERE producto_id = ?
+      ORDER BY orden ASC, id ASC
+    `
+  )
+    .bind(productId)
+    .all<ProductImage>();
+
+  return { ...result, imagenes: images.results ?? [] };
 });
 
 export const getRelatedProducts = cache(

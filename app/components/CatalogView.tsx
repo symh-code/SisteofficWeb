@@ -87,8 +87,8 @@ function parsePrice(price: string): number {
 }
 
 function formatPrice(price: number | string | null): string {
-  const numeric = typeof price === "number" ? price : Number.parseFloat(String(price ?? "0"));
-  if (!Number.isFinite(numeric)) return "$0";
+  const numeric = typeof price === "number" ? price : Number.parseFloat(String(price ?? ""));
+  if (!Number.isFinite(numeric) || numeric <= 0) return "Precio a cotizar";
   return new Intl.NumberFormat("es-CO", {
     style: "currency",
     currency: "COP",
