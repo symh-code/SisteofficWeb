@@ -29,44 +29,39 @@ const PROCESO_STEPS = [
   },
 ];
 
-// Mock product data (all same product as requested)
+// Local fallback used only when the API is unavailable.
 const mockProduct = {
-  id: 1,
-  nombre: "Silla Ergonómica Premium",
-  imagen_url: "https://images.unsplash.com/photo-1588854337236-6889d631f379?w=800&auto=format&fit=crop",
-  precio: 1250000,
-  precioOriginal: 1590000,
-  especificaciones: "Soporte lumbar ajustable, brazo 4D, base de aluminio, cuero sintético premium",
+  id: 23,
+  nombre: "Nova",
+  imagen_url: "/images/nova.webp",
+  precio: 1900000,
+  especificaciones: "Estación de trabajo operativa para dos puestos.",
 };
 
 const fallbackFeaturedProducts = [
   {
-    id: 1,
-    nombre: "Silla Ergonómica Premium",
-    imagen_url: "https://images.unsplash.com/photo-1588854337236-6889d631f379?w=800&auto=format&fit=crop",
-    precio: 1250000,
-    precioOriginal: 1590000,
+    id: 23,
+    nombre: "Nova",
+    imagen_url: "/images/nova.webp",
+    precio: 1900000,
   },
   {
-    id: 3,
-    nombre: "Silla Ejecutiva Comfort",
-    imagen_url: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800&auto=format&fit=crop",
-    precio: 1390000,
-    precioOriginal: 1650000,
+    id: 4,
+    nombre: "Milo",
+    imagen_url: "/images/milo.webp",
+    precio: 1500000,
   },
   {
-    id: 8,
-    nombre: "Silla Operativa Plus",
-    imagen_url: "https://images.unsplash.com/photo-1519947486511-46149fa0a254?w=800&auto=format&fit=crop",
-    precio: 980000,
-    precioOriginal: 1190000,
+    id: 19,
+    nombre: "CONNECTE",
+    imagen_url: "/images/connecte.webp",
+    precio: 2500000,
   },
   {
-    id: 10,
-    nombre: "Silla Directiva Elite",
-    imagen_url: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&auto=format&fit=crop",
-    precio: 1590000,
-    precioOriginal: 1890000,
+    id: 24,
+    nombre: "Core",
+    imagen_url: "/images/core.webp",
+    precio: 3200000,
   },
 ];
 
@@ -737,7 +732,13 @@ export function HomeClient() {
       return Array.from({ length: count }, () => mockProduct);
     }
 
-    return products.filter((product) => product.categoria_nombre === categoryName).slice(0, count);
+    return products
+      .filter(
+        (product) =>
+          product.categoria_nombre === categoryName ||
+          product.categoria_padre_nombre === categoryName,
+      )
+      .slice(0, count);
   };
 
   const withFallback = (arr: any[], count: number) => {
