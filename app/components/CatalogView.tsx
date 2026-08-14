@@ -46,7 +46,7 @@ type CatalogProduct = {
   categoriaPadreSlug: string | null;
 };
 
-type SortOption = "relevance" | "price-asc" | "price-desc" | "name-asc";
+type SortOption = "category-asc" | "relevance" | "price-asc" | "price-desc" | "name-asc";
 type ViewMode = "grid" | "list";
 
 /* ─── Categorías ─── */
@@ -70,6 +70,7 @@ const POPULAR_SEARCHES = [
 
 /* ─── Constantes ─── */
 const SORT_LABELS: Record<SortOption, string> = {
+  "category-asc": "Categoría A-Z",
   relevance: "Relevancia",
   "price-asc": "Menor precio",
   "price-desc": "Mayor precio",
@@ -624,7 +625,7 @@ export function CatalogView({ query }: { query: string }) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   /* UI */
-  const [sort, setSort] = useState<SortOption>("relevance");
+  const [sort, setSort] = useState<SortOption>("category-asc");
   const [sortOpen, setSortOpen] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
   const [page, setPage] = useState(1);
@@ -773,6 +774,13 @@ export function CatalogView({ query }: { query: string }) {
     });
 
     result.sort((a, b) => {
+      if (sort === "category-asc") {
+        const categoryComparison = a.categoria.localeCompare(b.categoria, "es", {
+          sensitivity: "base",
+        });
+        if (categoryComparison !== 0) return categoryComparison;
+        return a.name.localeCompare(b.name, "es", { sensitivity: "base" });
+      }
       if (sort === "price-asc") return parsePrice(a.price) - parsePrice(b.price);
       if (sort === "price-desc") return parsePrice(b.price) - parsePrice(a.price);
       if (sort === "name-asc") return a.name.localeCompare(b.name);

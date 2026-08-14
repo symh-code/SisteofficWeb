@@ -754,40 +754,22 @@ export function HomeClient() {
     fetchProducts();
   }, []);
 
-  const getCategoryProducts = (categoryName: string, count: number) => {
-    if (products.length === 0) {
-      return Array.from({ length: count }, () => mockProduct);
-    }
+  const belongsToCategory = (product: any, categoryName: string) =>
+    product.categoria_nombre === categoryName ||
+    product.categoria_padre_nombre === categoryName;
 
-    return products
-      .filter(
-        (product) =>
-          product.categoria_nombre === categoryName ||
-          product.categoria_padre_nombre === categoryName,
-      )
-      .slice(0, count);
-  };
-
-  const withFallback = (arr: any[], count: number) => {
-    if (arr.length >= count) return arr.slice(0, count);
-    const padded = [...arr];
-    while (padded.length < count) padded.push(mockProduct);
-    return padded;
-  };
-
-  const productosSobreCategoria0 = withFallback(getCategoryProducts(categorias[0].nombre, 2), 2);
-
-  // Pool de productos "genéricos" para las ProductCard que no pertenecen
-  // a ninguna categoría específica del grid. Excluye los productos ya
-  // reservados para evitar que aparezcan dos veces en esta misma sección.
-  const reservedProductIds = new Set(productosSobreCategoria0.map((product) => product.id));
-  const genericProductPool = products.length > 0
-    ? products.filter((product) => !reservedProductIds.has(product.id))
+  // La vitrina del home prioriza Escritorios y, cuando no son suficientes
+  // para completar el grid, continúa con las sillas Gerenciales.
+  const homeFeaturedProducts = products.length > 0
+    ? [
+        ...products.filter((product) => belongsToCategory(product, "Escritorios")),
+        ...products.filter((product) => belongsToCategory(product, "Gerenciales")),
+      ]
     : fallbackFeaturedProducts;
 
-  const getGenericProduct = (index: number) => {
-    if (genericProductPool.length === 0) return mockProduct;
-    return genericProductPool[index % genericProductPool.length];
+  const getHomeFeaturedProduct = (index: number) => {
+    if (homeFeaturedProducts.length === 0) return mockProduct;
+    return homeFeaturedProducts[index % homeFeaturedProducts.length];
   };
 
   const getCamodProduct = (index: number) => {
@@ -870,21 +852,19 @@ export function HomeClient() {
 
         {/* Grid Layout: Products + Category Cards */}
         <div className="grid grid-cols-2 gap-5 md:grid-cols-4">
-          <ProductCard product={getGenericProduct(0)} />
-          <ProductCard product={getGenericProduct(1)} />
-          {/* Estas 2 caen justo encima de CategoryCard[0] */}
-          <ProductCard product={productosSobreCategoria0[0]} />
-          <ProductCard product={productosSobreCategoria0[1]} />
+          <ProductCard product={getHomeFeaturedProduct(0)} />
+          <ProductCard product={getHomeFeaturedProduct(1)} />
+          <ProductCard product={getHomeFeaturedProduct(2)} />
+          <ProductCard product={getHomeFeaturedProduct(3)} />
 
-          <ProductCard product={getGenericProduct(2)} />
-          <ProductCard product={getGenericProduct(3)} />
+          <ProductCard product={getHomeFeaturedProduct(4)} />
+          <ProductCard product={getHomeFeaturedProduct(5)} />
           <CategoryCard category={categorias[0]} imagenOverride="/entrefoto-inicio.png" />
 
-          {/* Estas 2 caen justo encima de CategoryCard[1] */}
-          <ProductCard product={getGenericProduct(12)} />
-          <ProductCard product={getGenericProduct(13)} />
-          <ProductCard product={getGenericProduct(4)} />
-          <ProductCard product={getGenericProduct(5)} />
+          <ProductCard product={getHomeFeaturedProduct(6)} />
+          <ProductCard product={getHomeFeaturedProduct(7)} />
+          <ProductCard product={getHomeFeaturedProduct(8)} />
+          <ProductCard product={getHomeFeaturedProduct(9)} />
         </div>
       </section>
 
