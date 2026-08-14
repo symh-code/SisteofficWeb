@@ -72,24 +72,28 @@ const heroSlides = [
     badge: "Mobiliario corporativo",
     titulo: "Espacios abiertos, reinventados",
     subtitulo: "Ajuste inteligente con control sin esfuerzo.",
+    cta: "catalogo",
   },
   {
     imagen: "/slideshero/slide2.png",
     badge: "Diseño",
     titulo: "Comodidad que trabaja para ti",
     subtitulo: "Diseño ergonómico para tu jornada completa.",
+    cta: "cotizar",
   },
   {
     imagen: "/slideshero/slide3.png",
     badge: "Mobiliario",
     titulo: "Transforma tu espacio de trabajo",
     subtitulo: "Funcionalidad y estilo para cada proyecto.",
+    cta: "whatsapp",
   },
   {
     imagen: "/slideshero/slide4.png",
     badge: "Calidad profesional",
     titulo: "Tu oficina, a tu medida",
     subtitulo: "Mobiliario moderno para equipos que crecen.",
+    cta: "proyectos",
   },
 ];
 
@@ -367,9 +371,9 @@ function HeroSlider() {
               </div>
             )}
 
-            {/* CTA: cotización (slides 1-3) / navegación de proyectos (slide 4) */}
+            {/* CTA único y contextual en slides 1-3 / navegación de proyectos en slide 4 */}
             <div
-              key={isProjectsSlide ? "cta-proyectos" : "cta-default"}
+              key={`cta-${slide.cta}`}
               className={`ml-0 flex flex-shrink-0 flex-col gap-3 transition-opacity duration-500 ease-in-out sm:ml-10 sm:flex-row md:ml-24 lg:mr-8 ${
                 isProjectsSlide ? "lg:ml-auto" : "lg:ml-0"
               } xl:mr-16`}
@@ -407,31 +411,41 @@ function HeroSlider() {
                 </>
               ) : (
                 <>
-                  <Link
-                    href="/buscar"
-                    className="group/cta inline-flex w-full items-center justify-center gap-3 whitespace-nowrap bg-[#7A1E2B] px-8 py-4 text-center text-[13px] font-normal uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:bg-[#5c1620] sm:w-auto"
-                  >
-                    Explora nuestro mobiliario
-                    <svg
-                      className="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover/cta:translate-x-1"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+                  {slide.cta === "catalogo" && (
+                    <Link
+                      href="/buscar"
+                      className="group/cta inline-flex w-full items-center justify-center gap-3 whitespace-nowrap bg-[#7A1E2B] px-8 py-4 text-center text-[13px] font-normal uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:bg-[#5c1620] sm:w-auto"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.25} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </Link>
-                  <a
-                    href="https://wa.me/573003591054?text=Hola%2C%20Me%20gustar%C3%ADa%20conocer%20m%C3%A1s%20de%20sus%20servicios"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group/cta inline-flex w-full items-center justify-center gap-3 whitespace-nowrap bg-[#25D366] px-8 py-4 text-center text-[13px] font-normal uppercase tracking-[0.15em] text-white transition-colors duration-300 hover:bg-[#1EAD52] sm:w-auto"
-                  >
-                    Escríbenos por WhatsApp
-                    <svg className="h-4 w-4 shrink-0 fill-current" viewBox="0 0 32 32" aria-hidden="true">
-                      <path d="M16.001 3.2c-7.07 0-12.8 5.73-12.8 12.8 0 2.26.6 4.44 1.73 6.36L3.2 28.8l6.44-1.69a12.75 12.75 0 0 0 6.36 1.62h.005c7.07 0 12.8-5.73 12.8-12.8s-5.73-12.73-12.804-12.73Zm.002 23.4h-.004a10.6 10.6 0 0 1-5.578-1.598l-.383-.227-3.933 1.032 1.05-3.837-.245-.397a10.6 10.6 0 0 1-1.578-5.573c0-5.882 4.785-10.667 10.667-10.667 5.885 0 10.67 4.718 10.67 10.6 0 5.882-4.785 10.667-10.666 10.667Zm5.717-8.36c-.31-.156-1.84-.907-2.126-1.011-.285-.104-.492-.156-.699.156-.207.311-.802 1.01-.984 1.218-.181.208-.362.234-.673.078-.311-.156-1.312-.483-2.499-1.538-.924-.822-1.548-1.837-1.73-2.148-.181-.311-.019-.479.137-.634.14-.14.311-.363.467-.545.156-.181.207-.311.311-.519.104-.208.052-.39-.026-.545-.078-.156-.699-1.683-.958-2.303-.252-.605-.508-.523-.699-.533-.181-.008-.389-.01-.596-.01-.208 0-.545.078-.83.39-.285.311-1.089 1.064-1.089 2.594s1.115 3.009 1.27 3.216c.156.208 2.194 3.351 5.317 4.699.743.321 1.323.512 1.775.655.746.237 1.425.204 1.963.124.599-.09 1.84-.752 2.1-1.478.259-.727.259-1.35.181-1.478-.078-.13-.285-.208-.596-.363Z" />
-                    </svg>
-                  </a>
+                      Explora nuestro mobiliario
+                      <svg className="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover/cta:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.25} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </Link>
+                  )}
+                  {slide.cta === "cotizar" && (
+                    <Link
+                      href="/contacto"
+                      className="group/cta inline-flex w-full items-center justify-center gap-3 whitespace-nowrap bg-[#7A1E2B] px-8 py-4 text-center text-[13px] font-normal uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:bg-[#5c1620] sm:w-auto"
+                    >
+                      Cotiza con nosotros
+                      <svg className="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover/cta:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.25} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </Link>
+                  )}
+                  {slide.cta === "whatsapp" && (
+                    <a
+                      href="https://wa.me/573003591054?text=Hola%2C%20Me%20gustar%C3%ADa%20conocer%20m%C3%A1s%20de%20sus%20servicios"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group/cta inline-flex w-full items-center justify-center gap-3 whitespace-nowrap bg-[#25D366] px-8 py-4 text-center text-[13px] font-normal uppercase tracking-[0.15em] text-white transition-colors duration-300 hover:bg-[#1EAD52] sm:w-auto"
+                    >
+                      Escríbenos por WhatsApp
+                      <svg className="h-4 w-4 shrink-0 fill-current" viewBox="0 0 32 32" aria-hidden="true">
+                        <path d="M16.001 3.2c-7.07 0-12.8 5.73-12.8 12.8 0 2.26.6 4.44 1.73 6.36L3.2 28.8l6.44-1.69a12.75 12.75 0 0 0 6.36 1.62h.005c7.07 0 12.8-5.73 12.8-12.8s-5.73-12.73-12.804-12.73Zm.002 23.4h-.004a10.6 10.6 0 0 1-5.578-1.598l-.383-.227-3.933 1.032 1.05-3.837-.245-.397a10.6 10.6 0 0 1-1.578-5.573c0-5.882 4.785-10.667 10.667-10.667 5.885 0 10.67 4.718 10.67 10.6 0 5.882-4.785 10.667-10.666 10.667Zm5.717-8.36c-.31-.156-1.84-.907-2.126-1.011-.285-.104-.492-.156-.699.156-.207.311-.802 1.01-.984 1.218-.181.208-.362.234-.673.078-.311-.156-1.312-.483-2.499-1.538-.924-.822-1.548-1.837-1.73-2.148-.181-.311-.019-.479.137-.634.14-.14.311-.363.467-.545.156-.181.207-.311.311-.519.104-.208.052-.39-.026-.545-.078-.156-.699-1.683-.958-2.303-.252-.605-.508-.523-.699-.533-.181-.008-.389-.01-.596-.01-.208 0-.545.078-.83.39-.285.311-1.089 1.064-1.089 2.594s1.115 3.009 1.27 3.216c.156.208 2.194 3.351 5.317 4.699.743.321 1.323.512 1.775.655.746.237 1.425.204 1.963.124.599-.09 1.84-.752 2.1-1.478.259-.727.259-1.35.181-1.478-.078-.13-.285-.208-.596-.363Z" />
+                      </svg>
+                    </a>
+                  )}
                 </>
               )}
             </div>
