@@ -2,11 +2,11 @@
   {
     "slug": "momotea",
     "nombre": "MOMOTEA",
-    "cover": "/camodProyectos/MOMOTEA/01.png",
+    "cover": "/camodProyectos/MOMOTEA/01.webp",
     "imagenes": [
-      "/camodProyectos/MOMOTEA/01.png",
-      "/camodProyectos/MOMOTEA/02.png",
-      "/camodProyectos/MOMOTEA/03.png",
+      "/camodProyectos/MOMOTEA/01.webp",
+      "/camodProyectos/MOMOTEA/02.webp",
+      "/camodProyectos/MOMOTEA/03.webp",
       "/camodProyectos/MOMOTEA/04.jpeg",
       "/camodProyectos/MOMOTEA/05.jpeg"
     ]
@@ -27,29 +27,29 @@
   {
     "slug": "propuesta-rest-baq-caiman",
     "nombre": "Propuesta rest baq caiman",
-    "cover": "/camodProyectos/Propuesta%20rest%20baq%20caiman/01.png",
+    "cover": "/camodProyectos/Propuesta%20rest%20baq%20caiman/01.webp",
     "imagenes": [
-      "/camodProyectos/Propuesta%20rest%20baq%20caiman/01.png",
-      "/camodProyectos/Propuesta%20rest%20baq%20caiman/02.png",
-      "/camodProyectos/Propuesta%20rest%20baq%20caiman/03.png"
+      "/camodProyectos/Propuesta%20rest%20baq%20caiman/01.webp",
+      "/camodProyectos/Propuesta%20rest%20baq%20caiman/02.webp",
+      "/camodProyectos/Propuesta%20rest%20baq%20caiman/03.webp"
     ]
   },
   {
     "slug": "proyecto-caiman-del-rio",
     "nombre": "PROYECTO CAIMAN DEL RIO",
-    "cover": "/camodProyectos/PROYECTO%20CAIMAN%20DEL%20RIO/01.png",
+    "cover": "/camodProyectos/PROYECTO%20CAIMAN%20DEL%20RIO/01.webp",
     "imagenes": [
-      "/camodProyectos/PROYECTO%20CAIMAN%20DEL%20RIO/01.png",
-      "/camodProyectos/PROYECTO%20CAIMAN%20DEL%20RIO/02.png"
+      "/camodProyectos/PROYECTO%20CAIMAN%20DEL%20RIO/01.webp",
+      "/camodProyectos/PROYECTO%20CAIMAN%20DEL%20RIO/02.webp"
     ]
   },
   {
     "slug": "proyecto-clinica-s-r",
     "nombre": "PROYECTO CLINICA S.R",
-    "cover": "/camodProyectos/PROYECTO%20CLINICA%20S.R/01.png",
+    "cover": "/camodProyectos/PROYECTO%20CLINICA%20S.R/01.webp",
     "imagenes": [
-      "/camodProyectos/PROYECTO%20CLINICA%20S.R/01.png",
-      "/camodProyectos/PROYECTO%20CLINICA%20S.R/02.png",
+      "/camodProyectos/PROYECTO%20CLINICA%20S.R/01.webp",
+      "/camodProyectos/PROYECTO%20CLINICA%20S.R/02.webp",
       "/camodProyectos/PROYECTO%20CLINICA%20S.R/03.jpeg",
       "/camodProyectos/PROYECTO%20CLINICA%20S.R/04.jpeg",
       "/camodProyectos/PROYECTO%20CLINICA%20S.R/05.jpeg",
@@ -70,13 +70,13 @@
   {
     "slug": "proyecto-comercial-cronicas",
     "nombre": "PROYECTO COMERCIAL CRONICAS",
-    "cover": "/camodProyectos/PROYECTO%20COMERCIAL%20CRONICAS/04.png",
+    "cover": "/camodProyectos/PROYECTO%20COMERCIAL%20CRONICAS/04.webp",
     "imagenes": [
-      "/camodProyectos/PROYECTO%20COMERCIAL%20CRONICAS/01.png",
-      "/camodProyectos/PROYECTO%20COMERCIAL%20CRONICAS/02.png",
-      "/camodProyectos/PROYECTO%20COMERCIAL%20CRONICAS/03.png",
-      "/camodProyectos/PROYECTO%20COMERCIAL%20CRONICAS/04.png",
-      "/camodProyectos/PROYECTO%20COMERCIAL%20CRONICAS/05.png",
+      "/camodProyectos/PROYECTO%20COMERCIAL%20CRONICAS/01.webp",
+      "/camodProyectos/PROYECTO%20COMERCIAL%20CRONICAS/02.webp",
+      "/camodProyectos/PROYECTO%20COMERCIAL%20CRONICAS/03.webp",
+      "/camodProyectos/PROYECTO%20COMERCIAL%20CRONICAS/04.webp",
+      "/camodProyectos/PROYECTO%20COMERCIAL%20CRONICAS/05.webp",
       "/camodProyectos/PROYECTO%20COMERCIAL%20CRONICAS/WhatsApp%20Image%202026-08-04%20at%2010.33.20%20PM%20(1).jpeg",
       "/camodProyectos/PROYECTO%20COMERCIAL%20CRONICAS/WhatsApp%20Image%202026-08-04%20at%2010.33.20%20PM%20(2).jpeg",
       "/camodProyectos/PROYECTO%20COMERCIAL%20CRONICAS/WhatsApp%20Image%202026-08-04%20at%2010.33.20%20PM%20(3).jpeg",
@@ -108,11 +108,11 @@
   {
     "slug": "proyecto-dolphin-rose",
     "nombre": "PROYECTO DOLPHIN ROSE",
-    "cover": "/camodProyectos/PROYECTO%20DOLPHIN%20ROSE/01.png",
+    "cover": "/camodProyectos/PROYECTO%20DOLPHIN%20ROSE/01.webp",
     "imagenes": [
-      "/camodProyectos/PROYECTO%20DOLPHIN%20ROSE/01.png",
-      "/camodProyectos/PROYECTO%20DOLPHIN%20ROSE/02.png",
-      "/camodProyectos/PROYECTO%20DOLPHIN%20ROSE/03.png"
+      "/camodProyectos/PROYECTO%20DOLPHIN%20ROSE/01.webp",
+      "/camodProyectos/PROYECTO%20DOLPHIN%20ROSE/02.webp",
+      "/camodProyectos/PROYECTO%20DOLPHIN%20ROSE/03.webp"
     ]
   },
   {
@@ -132,19 +132,19 @@
   {
     "slug": "proyecto-h-s",
     "nombre": "PROYECTO H.S",
-    "cover": "/camodProyectos/PROYECTO%20H.S/09.png",
+    "cover": "/camodProyectos/PROYECTO%20H.S/09.webp",
     "imagenes": [
-      "/camodProyectos/PROYECTO%20H.S/01.png",
-      "/camodProyectos/PROYECTO%20H.S/02.png",
-      "/camodProyectos/PROYECTO%20H.S/03.png",
-      "/camodProyectos/PROYECTO%20H.S/04.png",
-      "/camodProyectos/PROYECTO%20H.S/05.png",
-      "/camodProyectos/PROYECTO%20H.S/06.png",
-      "/camodProyectos/PROYECTO%20H.S/07.png",
-      "/camodProyectos/PROYECTO%20H.S/08.png",
-      "/camodProyectos/PROYECTO%20H.S/09.png",
-      "/camodProyectos/PROYECTO%20H.S/10.png",
-      "/camodProyectos/PROYECTO%20H.S/11.png",
+      "/camodProyectos/PROYECTO%20H.S/01.webp",
+      "/camodProyectos/PROYECTO%20H.S/02.webp",
+      "/camodProyectos/PROYECTO%20H.S/03.webp",
+      "/camodProyectos/PROYECTO%20H.S/04.webp",
+      "/camodProyectos/PROYECTO%20H.S/05.webp",
+      "/camodProyectos/PROYECTO%20H.S/06.webp",
+      "/camodProyectos/PROYECTO%20H.S/07.webp",
+      "/camodProyectos/PROYECTO%20H.S/08.webp",
+      "/camodProyectos/PROYECTO%20H.S/09.webp",
+      "/camodProyectos/PROYECTO%20H.S/10.webp",
+      "/camodProyectos/PROYECTO%20H.S/11.webp",
       "/camodProyectos/PROYECTO%20H.S/WhatsApp%20Image%202026-08-04%20at%209.57.11%20PM%20(1).jpeg",
       "/camodProyectos/PROYECTO%20H.S/WhatsApp%20Image%202026-08-04%20at%209.57.11%20PM%20(2).jpeg",
       "/camodProyectos/PROYECTO%20H.S/WhatsApp%20Image%202026-08-04%20at%209.57.11%20PM.jpeg",

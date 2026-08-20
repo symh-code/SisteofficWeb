@@ -68,28 +68,28 @@ const fallbackFeaturedProducts = [
 // Hero slider slides (4 slides, 8s each) — usa imágenes locales desde public/slideshero
 const heroSlides = [
   {
-    imagen: "/slideshero/slide1.png",
+    imagen: "/slideshero/slide1.webp",
     badge: "Mobiliario corporativo",
     titulo: "Espacios abiertos, reinventados",
     subtitulo: "Ajuste inteligente con control sin esfuerzo.",
     cta: "catalogo",
   },
   {
-    imagen: "/slideshero/slide2.png",
+    imagen: "/slideshero/slide2.webp",
     badge: "Diseño",
     titulo: "Comodidad que trabaja para ti",
     subtitulo: "Diseño ergonómico para tu jornada completa.",
     cta: "cotizar",
   },
   {
-    imagen: "/slideshero/slide3.png",
+    imagen: "/slideshero/slide3.webp",
     badge: "Mobiliario",
     titulo: "Transforma tu espacio de trabajo",
     subtitulo: "Funcionalidad y estilo para cada proyecto.",
     cta: "whatsapp",
   },
   {
-    imagen: "/slideshero/slide4.png",
+    imagen: "/slideshero/slide4.webp",
     badge: "Calidad profesional",
     titulo: "Tu oficina, a tu medida",
     subtitulo: "Mobiliario moderno para equipos que crecen.",
@@ -106,7 +106,7 @@ function ProcesoSection() {
         {/* Foto */}
         <div className="relative h-[360px] sm:h-[480px] lg:h-auto lg:min-h-[560px]">
           <img
-            src="/imagen de nuestras soluciones.png"
+            src="/imagen de nuestras soluciones.webp"
             alt="Proceso de diseño y fabricación de mobiliario corporativo"
             className="absolute inset-0 h-full w-full object-cover"
           />
@@ -200,16 +200,16 @@ const categorias = CATEGORIA_DATA.map((cat) => ({
 }));
 
 const CATEGORY_DEMO_IMAGES: Record<string, string> = {
-  "puesto-de-trabajo": "/entrefoto-inicio.png",
+  "puesto-de-trabajo": "/entrefoto-inicio.webp",
   mesas: "/espacios/CAFETERIA.jfif",
-  sillas: "/categorias/sillas.png",
-  almacenamiento: "/categorias/almacenamiento.png",
-  "linea-educativa": "/categorias/linea-educativa.png",
-  "cabinas-zenbox": "/categorias/cabinas-zenbox.png",
+  sillas: "/categorias/sillas.webp",
+  almacenamiento: "/categorias/almacenamiento.webp",
+  "linea-educativa": "/categorias/linea-educativa.webp",
+  "cabinas-zenbox": "/categorias/cabinas-zenbox.webp",
   divisiones: "/espacios/visual3.jpg",
   counter: "/espacios/ENTRADA.jfif",
-  "mobiliario-especial": "/espacios/render4.png",
-  accesorios: "/categorias/accesorios.png",
+  "mobiliario-especial": "/espacios/render4.webp",
+  accesorios: "/categorias/accesorios.webp",
 };
 
 function ProductCard({ product }: { product: any }) {
@@ -859,7 +859,7 @@ export function HomeClient() {
 
           <ProductCard product={getHomeFeaturedProduct(4)} />
           <ProductCard product={getHomeFeaturedProduct(5)} />
-          <CategoryCard category={categorias[0]} imagenOverride="/entrefoto-inicio.png" />
+          <CategoryCard category={categorias[0]} imagenOverride="/entrefoto-inicio.webp" />
 
           <ProductCard product={getHomeFeaturedProduct(6)} />
           <ProductCard product={getHomeFeaturedProduct(7)} />
@@ -873,7 +873,7 @@ export function HomeClient() {
         <div className="grid grid-cols-2 gap-5 md:grid-cols-4">
           <CategoryCard
             category={categorias[1]}
-            imagenOverride="/camodCategoria.png"
+            imagenOverride="/camodCategoria.webp"
             hrefOverride="/camodstudio"
             hideContent
             imagePosition="top"

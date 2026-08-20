@@ -6,10 +6,10 @@ import { Lightbox, type LightboxItem } from "./Lightbox";
 type GaleriaItem = LightboxItem;
 
 const PROYECTOS: GaleriaItem[] = [
-  { src: "/espacios/nuevos/proyecto-11.png", label: "Oficina ejecutiva" },
-  { src: "/espacios/nuevos/proyecto-12.png", label: "Escritorio en L" },
-  { src: "/espacios/nuevos/proyecto-13.png", label: "Estaciones de trabajo" },
-  { src: "/espacios/nuevos/proyecto-14.png", label: "Estaciones de trabajo" },
+  { src: "/espacios/nuevos/proyecto-11.webp", label: "Oficina ejecutiva" },
+  { src: "/espacios/nuevos/proyecto-12.webp", label: "Escritorio en L" },
+  { src: "/espacios/nuevos/proyecto-13.webp", label: "Estaciones de trabajo" },
+  { src: "/espacios/nuevos/proyecto-14.webp", label: "Estaciones de trabajo" },
   { src: "/espacios/ENTRADA.jfif", label: "Recepción" },
   { src: "/espacios/CUBICULO.jfif", label: "Cubículo" },
   { src: "/espacios/CAFETERIA.jfif", label: "Cafetería" },
@@ -26,18 +26,18 @@ const RENDERS: GaleriaItem[] = [
   { src: "/espacios/ISOMETRIC.jfif", label: "Vista isométrica" },
   { src: "/espacios/PLANT.jfif", label: "Planta arquitectónica" },
   { src: "/espacios/planta oficina.jpg", label: "Distribución de planta" },
-  { src: "/espacios/modelo1.png", label: "Modelo 3D" },
-  { src: "/espacios/escen03.png", label: "Render de escena" },
-  { src: "/espacios/escena opcion02.png", label: "Render de escena" },
-  { src: "/espacios/img01.png", label: "Render" },
-  { src: "/espacios/img02.png", label: "Render" },
-  { src: "/espacios/render2.png", label: "Render" },
-  { src: "/espacios/render4.png", label: "Render" },
+  { src: "/espacios/modelo1.webp", label: "Modelo 3D" },
+  { src: "/espacios/escen03.webp", label: "Render de escena" },
+  { src: "/espacios/escena opcion02.webp", label: "Render de escena" },
+  { src: "/espacios/img01.webp", label: "Render" },
+  { src: "/espacios/img02.webp", label: "Render" },
+  { src: "/espacios/render2.webp", label: "Render" },
+  { src: "/espacios/render4.webp", label: "Render" },
   { src: "/espacios/v1.jpg", label: "Visualización" },
   { src: "/espacios/visual.jpg", label: "Visualización" },
   { src: "/espacios/visual3.jpg", label: "Visualización" },
-  { src: "/espacios/nuevos/render-15.png", label: "Vista isométrica" },
-  { src: "/espacios/nuevos/render-16.png", label: "Planta 3D" },
+  { src: "/espacios/nuevos/render-15.webp", label: "Vista isométrica" },
+  { src: "/espacios/nuevos/render-16.webp", label: "Planta 3D" },
 ];
 
 function GaleriaGrid({

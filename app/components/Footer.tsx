@@ -196,7 +196,7 @@ export function Footer({ isCamod = false }: { isCamod?: boolean }) {
               className="group inline-flex items-center gap-3"
             >
               <Image
-                src={isCamod ? "/camodLogos/logoCamodBlanco.png" : "/sisteoffic-logo.png"}
+                src={isCamod ? "/camodLogos/logoCamodBlanco.webp" : "/sisteoffic-logo.webp"}
                 alt={isCamod ? "CAMÖD Studio" : "SisteOffic"}
                 width={420}
                 height={120}
@@ -365,7 +365,7 @@ export function Footer({ isCamod = false }: { isCamod?: boolean }) {
 
               <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-3/4">
                 <Image
-                  src="/gps_logo.png"
+                  src="/gps_logo.webp"
                   alt="Pin SisteOffic"
                   width={880}
                   height={1205}

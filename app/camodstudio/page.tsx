@@ -94,18 +94,18 @@ const proceso: {
 ];
 
 const moodboardImages = [
-  "/moodboard/imagen carrusel moodboard2.png",
-  "/moodboard/imagen carrusel moodboard3.png",
-  "/moodboard/imagen carrusel moodboard4.png",
+  "/moodboard/imagen carrusel moodboard2.webp",
+  "/moodboard/imagen carrusel moodboard3.webp",
+  "/moodboard/imagen carrusel moodboard4.webp",
 ];
 
 const renderImages = [
   "/camodstudio/renders/render-01.jpeg",
   "/camodstudio/renders/render-02.jpeg",
-  "/camodstudio/renders/render-03.png",
+  "/camodstudio/renders/render-03.webp",
   "/camodstudio/renders/render-04.jpeg",
-  "/camodstudio/renders/render-05.png",
-  "/camodstudio/renders/render-06.png",
+  "/camodstudio/renders/render-05.webp",
+  "/camodstudio/renders/render-06.webp",
   "/camodstudio/renders/render-07.jpeg",
   "/camodstudio/renders/render-08.jpeg",
   "/camodstudio/renders/render-09.jpeg",
@@ -251,7 +251,7 @@ export default async function CamodStudioPage() {
           </span>
           <div className="mt-4 flex items-center gap-3">
             <Image
-              src="/moodboard/icono de moodboard.png"
+              src="/moodboard/icono de moodboard.webp"
               alt=""
               width={40}
               height={40}

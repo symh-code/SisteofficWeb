@@ -328,7 +328,7 @@ export function Navbar() {
               {/* Logo */}
               <Link href="/" className="flex shrink-0 items-center transition-opacity hover:opacity-90">
                 <Image
-                  src="/sisteoffic-logo.png"
+                  src="/sisteoffic-logo.webp"
                   alt="SisteOffic"
                   width={160}
                   height={40}

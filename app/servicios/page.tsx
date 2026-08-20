@@ -32,7 +32,7 @@ const servicios: Servicio[] = [
     nombre: "Arquitectura",
     descripcion:
       "Diseñamos espacios corporativos funcionales que optimizan la distribución, la circulación y la experiencia de trabajo.",
-    imagen: "/servicios/Icono de arquitectura.png",
+    imagen: "/servicios/Icono de arquitectura.webp",
   },
   {
     id: "diseno-interior",
@@ -40,7 +40,7 @@ const servicios: Servicio[] = [
     nombre: "Diseño interior",
     descripcion:
       "Seleccionamos materiales, iluminación, mobiliario y acabados para crear espacios alineados con la identidad de cada empresa.",
-    imagen: "/servicios/icono de diseño interior.png",
+    imagen: "/servicios/icono de diseño interior.webp",
   },
   {
     id: "fabricacion-de-mobiliario",
@@ -54,14 +54,14 @@ const servicios: Servicio[] = [
     numero: "04",
     nombre: "Adecuaciones",
     descripcion: "Ejecutamos remodelaciones, adecuaciones e intervenciones para renovar espacios de trabajo.",
-    imagen: "/servicios/icono de adecuacion.png",
+    imagen: "/servicios/icono de adecuacion.webp",
   },
   {
     id: "proyectos-llave-en-mano",
     numero: "05",
     nombre: "Proyectos llave en mano",
     descripcion: "Nos encargamos del proyecto completo, desde el diseño hasta la entrega final.",
-    imagen: "/moodboard/icono de llaves en mano.png",
+    imagen: "/moodboard/icono de llaves en mano.webp",
   },
   {
     id: "camod-studio",
@@ -69,7 +69,7 @@ const servicios: Servicio[] = [
     nombre: "CAMÖD Studio",
     descripcion:
       "Nuestro estudio creativo desarrolla el concepto, la arquitectura interior y la identidad espacial de cada proyecto.",
-    imagen: "/moodboard/icono de camod.png",
+    imagen: "/moodboard/icono de camod.webp",
     cta: { label: "Descubre CAMÖD Studio", href: "/camodstudio" },
   },
 ];
@@ -95,7 +95,7 @@ export default function ServiciosPage() {
       {/* ─── Hero ─── */}
       <section className="relative flex h-[86vh] min-h-[560px] w-full items-end overflow-hidden">
         <Image
-          src="/servicios/imagen incial de servicios.png"
+          src="/servicios/imagen incial de servicios.webp"
           alt="Proyecto corporativo diseñado y fabricado por Sisteoffic"
           fill
           priority
@@ -239,7 +239,7 @@ export default function ServiciosPage() {
       {/* ─── CTA final ─── */}
       <section className="relative flex h-[70vh] min-h-[480px] w-full items-center justify-center overflow-hidden">
         <Image
-          src="/servicios/imagen final de servicios.png"
+          src="/servicios/imagen final de servicios.webp"
           alt="Espacio de trabajo diseñado por Sisteoffic"
           fill
           className="object-cover"

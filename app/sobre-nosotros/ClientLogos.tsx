@@ -6,27 +6,27 @@ import { motion } from "framer-motion";
 const clientes = [
   {
     nombre: "Drummond LTD Colombia",
-    logo: "/clientes/drummond-v2.png",
+    logo: "/clientes/drummond-v2.webp",
     className: "max-h-32 max-w-[145px] sm:max-w-[170px]",
   },
   {
     nombre: "Farmatodo",
-    logo: "/clientes/farmatodo-v2.png",
+    logo: "/clientes/farmatodo-v2.webp",
     className: "max-h-24 max-w-[145px] sm:max-w-[230px]",
   },
   {
     nombre: "Combarranquilla",
-    logo: "/clientes/combarranquilla-v2.png",
+    logo: "/clientes/combarranquilla-v2.webp",
     className: "max-h-24 max-w-[145px] sm:max-w-[230px]",
   },
   {
     nombre: "Universidad Libre",
-    logo: "/clientes/universidad-libre-v2.png",
+    logo: "/clientes/universidad-libre-v2.webp",
     className: "max-h-32 max-w-[130px] sm:max-w-[150px]",
   },
   {
     nombre: "Mac Pollo",
-    logo: "/clientes/mac-pollo-v2.png",
+    logo: "/clientes/mac-pollo-v2.webp",
     className: "max-h-32 max-w-[145px] sm:max-w-[190px]",
   },
 ] as const;

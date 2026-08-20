@@ -23,7 +23,7 @@ export function CamodHero() {
       className="relative flex h-[92vh] min-h-[680px] w-full items-end overflow-hidden sm:min-h-[760px]"
     >
       <img
-        src="/camodstudio/hero-le-ciel-bleu.png"
+        src="/camodstudio/hero-le-ciel-bleu.webp"
         alt="Proyecto de interiorismo Le Ciel Bleu diseñado por CAMÖD Studio"
         className="animate-kenburns absolute inset-0 h-full w-full object-cover"
       />

@@ -14,8 +14,8 @@ const IMAGE_EXTENSIONS = new Set([".png", ".jpg", ".jpeg", ".webp", ".jfif"]);
 const EXCLUDED_PROJECTS = new Set(["PROYECTO G.P"]);
 const COVER_OVERRIDES = {
   "proyecto-comercial": "02.jpeg",
-  "proyecto-comercial-cronicas": "04.png",
-  "proyecto-h-s": "09.png",
+  "proyecto-comercial-cronicas": "04.webp",
+  "proyecto-h-s": "09.webp",
   "proyecto-o-p": "03.jpeg",
   "proyecto-y-y": "WhatsApp Image 2026-08-04 at 11.20.46 PM (1).jpeg",
   "proyecto-hostal": "WhatsApp Image 2026-08-04 at 11.16.35 PM.jpeg",

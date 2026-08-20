@@ -80,7 +80,7 @@ export function CamodNavbar() {
           className="flex shrink-0 items-center transition-opacity hover:opacity-80"
         >
           <Image
-            src="/camodLogos/logoCamodBlanco.png"
+            src="/camodLogos/logoCamodBlanco.webp"
             alt="CAMÖD Studio"
             width={420}
             height={120}

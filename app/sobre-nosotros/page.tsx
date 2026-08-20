@@ -18,7 +18,7 @@ export default function SobreNosotrosPage() {
       {/* ─── Hero ─── */}
       <section className="relative flex min-h-[520px] items-end overflow-hidden sm:min-h-[620px]">
         <Image
-          src="/sobre-nosotros-hero.png"
+          src="/sobre-nosotros-hero.webp"
           alt="Taller de fabricación de mobiliario de Sisteoffic JL en Barranquilla"
           fill
           className="object-cover object-center"
