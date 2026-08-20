@@ -903,6 +903,53 @@ export function CatalogView({ query }: { query: string }) {
             </p>
           </div>
 
+          {/* Accesos rápidos a categorías en móvil */}
+          <div className="mt-5 lg:hidden">
+            <p className="mb-2.5 text-[11px] font-medium uppercase tracking-[0.16em] text-stone-400">
+              Explora categorías
+            </p>
+            <div
+              className="-mx-3 flex gap-2 overflow-x-auto px-3 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              aria-label="Categorías del catálogo"
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  setSelectedCategories([]);
+                  setPage(1);
+                }}
+                aria-pressed={selectedCategories.length === 0}
+                className={`shrink-0 rounded-full border px-4 py-2 text-[12px] transition-colors ${
+                  selectedCategories.length === 0
+                    ? "border-[#7A1E2B] bg-[#7A1E2B] text-white"
+                    : "border-stone-200 bg-stone-50 text-stone-600 hover:border-stone-300"
+                }`}
+              >
+                Todas
+              </button>
+              {categories.map((category) => {
+                const categoryId = Number(category.slug);
+                const selected = selectedCategories.includes(categoryId);
+
+                return (
+                  <button
+                    key={category.slug}
+                    type="button"
+                    onClick={() => toggleCategory(categoryId)}
+                    aria-pressed={selected}
+                    className={`shrink-0 rounded-full border px-4 py-2 text-[12px] transition-colors ${
+                      selected
+                        ? "border-[#7A1E2B] bg-[#7A1E2B] text-white"
+                        : "border-stone-200 bg-stone-50 text-stone-600 hover:border-stone-300"
+                    }`}
+                  >
+                    {category.name}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
           <div className="mt-8">
             <SearchBar
               value={searchInput}

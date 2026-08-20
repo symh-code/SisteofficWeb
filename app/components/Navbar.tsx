@@ -36,7 +36,7 @@ const mainNavLinks: { label: string; href: string }[] = [
 
 /** Los enlaces del panel del menú (estilo Enwork) */
 const menuLinks: { label: string; href: string }[] = [
-  { label: "Ve nuestros productos", href: "/buscar" },
+  { label: "Nuestros productos", href: "/buscar" },
   { label: "Servicios", href: "/servicios" },
   { label: "Galería", href: "/espacios" },
   { label: "CAMÖD Studio", href: "/camodstudio" },

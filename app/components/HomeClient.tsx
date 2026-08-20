@@ -583,7 +583,7 @@ function ColeccionesSection() {
             <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-[#7A1E2B]">
               Colecciones de mobiliario
             </span>
-            <p className="max-w-3xl text-3xl font-normal leading-[1.35] text-[#3a1219] sm:text-4xl">
+            <p className="max-w-3xl font-serif text-3xl font-normal leading-[1.35] text-[#3a1219] sm:text-4xl">
               Diseñamos y fabricamos soluciones para cada espacio de trabajo.
             </p>
           </div>
@@ -839,7 +839,7 @@ export function HomeClient() {
       {/* PRODUCTS AND CATEGORIES GRID LAYOUT — full width */}
       <section className="w-full bg-white px-6 pb-16 pt-20 lg:px-12">
         <div className="mb-8 flex items-center justify-between">
-          <h2 className="text-2xl font-bold tracking-tight text-gray-900">
+          <h2 className="font-serif text-2xl font-bold tracking-tight text-gray-900">
            Explora Nuestro Mobiliario
           </h2>
           <Link
